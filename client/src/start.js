@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+//We start here!
 
 ReactDOM.render(<HelloWorld />, document.querySelector("main"));
 
