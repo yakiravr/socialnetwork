@@ -10,18 +10,13 @@ export default class Registration extends React.Component {
     }
 
     handleClick() {
-        // console.log("clicked!!!");
         axios
             .post("/registration", this.state)
             .then(({ data }) => {
-                if (everything went according to plan - no errors!) {
-                    // redirect
-                    location.replace('/');
+                if (data) {
+                    location.replace("/");
                 } else {
-                    // render an error message
-                    this.setState({
-                        error: true
-                    });
+                    this.setState({ error: true });
                 }
             })
             .catch((err) => {
@@ -30,19 +25,13 @@ export default class Registration extends React.Component {
     }
 
     handleChange(e) {
-        // console.log("change is running!");
         this.setState(
             {
                 [e.target.name]: e.target.value,
             },
-            // this callback runs after setState finishes updating state 
-            // because we're logging state here in the callback, this means this 
-            // log won't run until state has been updated, ensuring us that 
-            // we're seeing the most updated log
+
             () => console.log("this.state after setState: ", this.state)
         );
-
-        // console.log("this.state after setState: ", this.state);
     }
 
     render() {
