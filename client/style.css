@@ -30,8 +30,9 @@ textarea:focus {
     box-shadow: 0 0 5px blue;
 }
 
-img {
-    position: absolute;
-    top: 0px;
-    right: 0px;
+#login_in_egistration {
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 760px;
 }

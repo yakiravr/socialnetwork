@@ -14,7 +14,7 @@ module.exports.addUser = (first, last, email, password_hash) => {
 };
 
 exports.getLogin = (email) => {
-    const q = `SELECT id, password FROM users WHERE email = $1`;
+    const q = `SELECT id, password_hash FROM users WHERE email = $1`;
     const params = [email];
     return db.query(q, params);
 };

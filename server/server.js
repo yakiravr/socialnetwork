@@ -40,16 +40,16 @@ app.post("/registration", (req, res) => {
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
                     console.log("rows", rows[0].id);
-                    res.json({ success: false });
+                    res.json({ success: true });
                 })
                 .catch((error) => {
                     console.log("addUser db error: ", error);
-                    res.json({ success: true });
+                    res.json({ success: false });
                 });
         })
         .catch((error) => {
             console.log("error in hash password: ", error);
-            res.json({ success: true });
+            res.json({ success: false });
         });
 });
 
@@ -57,24 +57,24 @@ app.post("/login", (req, res) => {
     const { email, password } = req.body;
     db.getLogin(email)
         .then(({ rows }) => {
-            let passResult = rows[0].password;
+            let passResult = rows[0].password_hash;
             compare(password, passResult)
                 .then((compare) => {
                     if (compare) {
                         req.session.userId = rows[0].id;
-                        res.json({ success: false });
-                    } else {
                         res.json({ success: true });
+                    } else {
+                        res.json({ success: false });
                     }
                 })
                 .catch((err) => {
                     console.log("error in db getLogin: ", err);
-                    res.json({ success: true });
+                    res.json({ success: false });
                 });
         })
         .catch((err) => {
             console.log("db.getLogin catch error: ", err);
-            res.json({ success: true });
+            res.json({ success: false });
         });
 });
 

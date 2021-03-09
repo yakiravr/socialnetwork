@@ -5,6 +5,7 @@ export default class Login extends React.Component {
     constructor() {
         super();
         this.state = {
+            success: true,
             error: false,
         };
     }
@@ -13,7 +14,7 @@ export default class Login extends React.Component {
         axios
             .post("/login", this.state)
             .then(({ data }) => {
-                if (data) {
+                if (data.success) {
                     location.replace("/");
                 } else {
                     this.setState({ error: true });

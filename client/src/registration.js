@@ -6,6 +6,7 @@ export default class Registration extends React.Component {
     constructor() {
         super();
         this.state = {
+            success: true,
             error: false,
         };
     }
@@ -14,7 +15,7 @@ export default class Registration extends React.Component {
         axios
             .post("/registration", this.state)
             .then(({ data }) => {
-                if (data) {
+                if (data.success) {
                     location.replace("/");
                 } else {
                     this.setState({ error: true });
@@ -62,7 +63,9 @@ export default class Registration extends React.Component {
                     onChange={(e) => this.handleChange(e)}
                 />
                 <button onClick={() => this.handleClick()}>submit!</button>
-                <Link to="/login">Login?</Link>
+                <div id="login_in_egistration">
+                    <Link to="/login">Login?</Link>
+                </div>
             </div>
         );
     }
