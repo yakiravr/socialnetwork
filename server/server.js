@@ -3,13 +3,13 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
-const { hash } = require("./bc");
+const { hash, compare } = require("./bc");
 const db = require("./db");
+const csurf = require("csurf");
 
 app.use(compression());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
@@ -18,6 +18,12 @@ app.use(
         maxAge: 1000 * 60 * 60 * 24 * 14,
     })
 );
+
+app.use(csurf());
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
@@ -43,6 +49,31 @@ app.post("/registration", (req, res) => {
         })
         .catch((error) => {
             console.log("error in hash password: ", error);
+            res.json({ success: true });
+        });
+});
+
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    db.getLogin(email)
+        .then(({ rows }) => {
+            let passResult = rows[0].password;
+            compare(password, passResult)
+                .then((compare) => {
+                    if (compare) {
+                        req.session.userId = rows[0].id;
+                        res.json({ success: false });
+                    } else {
+                        res.json({ success: true });
+                    }
+                })
+                .catch((err) => {
+                    console.log("error in db getLogin: ", err);
+                    res.json({ success: true });
+                });
+        })
+        .catch((err) => {
+            console.log("db.getLogin catch error: ", err);
             res.json({ success: true });
         });
 });
