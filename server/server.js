@@ -6,6 +6,8 @@ const cookieSession = require("cookie-session");
 const { hash, compare } = require("./bc");
 const db = require("./db");
 const csurf = require("csurf");
+const cryptoRandomString = require("crypto-random-string");
+const ses = require("./ses");
 
 app.use(compression());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
@@ -74,6 +76,53 @@ app.post("/login", (req, res) => {
         })
         .catch((err) => {
             console.log("db.getLogin catch error: ", err);
+            res.json({ success: false });
+        });
+});
+
+app.post("/login/verification", (req, res) => {
+    const { email } = req.body;
+    db.getLogin(email)
+        .then(({ rows }) => {
+            if (rows[0]) {
+                const secretCode = cryptoRandomString({ length: 6 });
+                //Send the email with the code to the specified email address using SES
+                db.storingCode(email, secretCode).then(() => {
+                    ses.sendEmail(email, secretCode);
+                    res.json({ success: true });
+                });
+            } else {
+                res.json({ success: false });
+            }
+        })
+        .catch((err) => {
+            console.log("error in verification: ", err);
+            res.json({ success: false });
+        });
+});
+
+app.post("login/rest", (req, res) => {
+    // Find the code in the database by the email address in req.body
+    const { code, newPass, email } = req.body;
+    //Compare the code in req.body to the code from the database
+    db.interval(email)
+        .then(({ rows }) => {
+            //If they are the same
+            if (code === rows[0]) {
+                console.log("rows", rows[0]);
+                res.json({ success: true });
+                //hash the password in req.body
+                hash(newPass).then((hashPassword) => {
+                    db.updatePassword(hashPassword).then(() => {
+                        res.json({ success: true });
+                    });
+                });
+            } else {
+                res.json({ success: false });
+            }
+        })
+        .catch((err) => {
+            console.log("error in db rest: ", err);
             res.json({ success: false });
         });
 });

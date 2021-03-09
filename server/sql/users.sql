@@ -8,3 +8,13 @@ CREATE TABLE users (
     password_hash VARCHAR NOT NULL CHECK (password_hash <> ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+DROP TABLE IF EXISTS reset_code;
+
+CREATE TABLE rest_code (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR NOT NULL UNIQUE CHECK (email <> ''),
+    code VARCHAR NOT NULL CHECK (code <> ''),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
