@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Login extends React.Component {
     constructor() {
@@ -51,6 +52,9 @@ export default class Login extends React.Component {
                     placeholder="Password"
                     onChange={(e) => this.handleChange(e)}
                 />
+                <div id="login_in_egistration">
+                    <Link to="/verification">rest password</Link>
+                </div>
 
                 <button onClick={() => this.handleClick()}>Login!</button>
             </div>
