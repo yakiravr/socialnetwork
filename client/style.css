@@ -1,5 +1,10 @@
 body {
-    background-color: ghostwhite;
+    background-color: white;
+}
+
+#logo {
+    justify-items: center;
+    size: 20px;
 }
 
 input {
@@ -35,4 +40,81 @@ textarea:focus {
     align-items: center;
     margin-top: 5px;
     margin-left: 760px;
+}
+
+/* /*___________ */
+
+.regForm {
+    text-shadow: -1px 1px 0 black, 1px -1px 0 black, 1px 1px 0 black,
+        -1px -1px 0 black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.233);
+    box-shadow: -0 0 10px rgba(0, 0, 0, 0.7), 0 -0 10px rgba(0, 0, 0, 0.7),
+        -0 -0 10px rgba(0, 0, 0, 0.7), -0 -0 10px rgba(0, 0, 0, 0.7);
+    margin: auto;
+    padding: 10px;
+    width: 300px;
+    border-radius: 20px;
+}
+
+.on-reset h1 {
+    font-size: 40px;
+    color: black;
+    text-shadow: -1px 1px 0 white, 1px -1px 0 white, 1px 1px 0 white,
+        -1px -1px 0 white;
+    margin: 0 0 20px 0;
+}
+
+.on-reset input {
+    background-color: rgba(0, 0, 0, 0.219);
+    color: white;
+    text-align: center;
+    border-radius: 5vh;
+    border-color: transparent;
+    border-style: solid;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+}
+
+.on-reset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    color: white;
+    margin: auto;
+}
+
+.on-reset input {
+    margin: auto;
+    border-color: transparent;
+    border-style: solid;
+    background-color: black;
+    margin-top: 20px;
+}
+
+.on-reset button {
+    background-color: black;
+    color: white;
+    border-color: transparent;
+    margin-bottom: 5px;
+}
+
+.error {
+    color: crimson;
+}
+
+.Link {
+    margin: 5px;
+    text-decoration: none;
+    background-color: beige;
+    width: 150px;
+    text-align: center;
 }

@@ -26,7 +26,7 @@ exports.sendEmail = (to, verification) =>
                         Data:
                             "seems you forgot your password. To rest it, just enter this " +
                             verification +
-                            "code on the rest-password page",
+                            " code on the rest-password page",
                     },
                 },
                 Subject: {

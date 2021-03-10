@@ -1,13 +1,14 @@
-import { Component } from "react";
+import React from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
-export default class ResetPassword extends Component {
-    constructor(props) {
-        super(props);
+export default class ResetPassword extends React.Component {
+    constructor() {
+        super();
         this.state = {
-            step: 1,
-            success: true,
             error: false,
+            sucsses: true,
+            step: 1,
         };
     }
 
@@ -15,29 +16,41 @@ export default class ResetPassword extends Component {
         axios
             .post("/login/verification", this.state)
             .then(({ data }) => {
-                if (data.success) {
-                    location.replace("login/rest");
+                if (data) {
+                    this.setState({
+                        step: 2,
+                    });
                 } else {
-                    this.setState({ error: true });
+                    console.log("error in handleClick");
+                    this.setState({
+                        error: true,
+                        sucsses: false,
+                    });
                 }
             })
-            .catch((error) => {
-                console.log("err in axios POST /login/verification", error);
+            .catch((err) => {
+                console.log("err in axios POST verification:", err);
             });
     }
 
-    handleClickRest() {
+    handleClickReset() {
         axios
             .post("/login/rest", this.state)
             .then(({ data }) => {
-                if (data.success) {
-                    location.replace("login");
+                if (data) {
+                    this.setState({
+                        step: 3,
+                    });
                 } else {
-                    this.setState({ error: true });
+                    console.log("error in handleClickReset");
+                    this.setState({
+                        error: true,
+                        sucsses: false,
+                    });
                 }
             })
-            .catch((error) => {
-                console.log("err in axios POST /login/verification", error);
+            .catch((err) => {
+                console.log("err in axios POST reset:", err);
             });
     }
 
@@ -47,7 +60,7 @@ export default class ResetPassword extends Component {
                 [e.target.name]: e.target.value,
             },
 
-            () => console.log("this.state after setState: ", this.state)
+            () => console.log("handleChange: ", this.state)
         );
     }
 
@@ -55,39 +68,62 @@ export default class ResetPassword extends Component {
         const { step } = this.state;
         if (step == 1) {
             return (
-                <div>
-                    <h1>.......</h1>
-                    {this.state.error && <p>something went wrong :(</p>}
+                <div className="on-reset">
+                    <h1>Reset Password</h1>
+                    <span>Email</span>
+
                     <input
                         name="email"
-                        placeholder="email"
+                        placeholder="Email"
                         onChange={(e) => this.handleChange(e)}
                     />
+
+                    {this.state.error && (
+                        <p className="error">something went wrong</p>
+                    )}
+
+                    <button onClick={() => this.handleClick()}>Send</button>
+                    <Link to="/" className="Link">
+                        Back
+                    </Link>
                 </div>
             );
         } else if (step == 2) {
             return (
-                <div>
-                    {this.state.error && <p>something went wrong :(</p>}
+                <div className="on-reset">
+                    <h1>Confirm</h1>
+                    <h1>Secret Code</h1>
                     <input
                         name="code"
                         placeholder="code"
                         onChange={(e) => this.handleChange(e)}
                     />
-
+                    <span>New Password</span>
                     <input
-                        name="new password"
-                        placeholder="new pass word"
+                        name="newpass"
+                        placeholder="New Password"
                         type="password"
                         onChange={(e) => this.handleChange(e)}
                     />
+                    {this.state.error && (
+                        <p className="error">something went wrong</p>
+                    )}
+                    <button onClick={() => this.handleClickReset()}>
+                        Submit
+                    </button>
+                    <Link to="/" className="Link">
+                        Back
+                    </Link>
                 </div>
             );
         } else if (step == 3) {
             return (
-                <div>
-                    Yay, it worked!
-                    {this.state.error && <p>something went wrong :(</p>}
+                <div className="on-reset">
+                    <h1>Password Updated </h1>
+
+                    <Link to="/login" className="Link">
+                        Back
+                    </Link>
                 </div>
             );
         }

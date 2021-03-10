@@ -66,6 +66,10 @@ export default class Registration extends React.Component {
                 <div id="login_in_egistration">
                     <Link to="/login">Login?</Link>
                 </div>
+
+                <div id="login_in_egistration">
+                    <Link to="/verification">rest password</Link>
+                </div>
             </div>
         );
     }

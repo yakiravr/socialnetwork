@@ -6,7 +6,7 @@ const cookieSession = require("cookie-session");
 const { hash, compare } = require("./bc");
 const db = require("./db");
 const csurf = require("csurf");
-const cryptoRandomString = require("crypto-random-string");
+const crs = require("crypto-random-string");
 const ses = require("./ses");
 
 app.use(compression());
@@ -79,53 +79,66 @@ app.post("/login", (req, res) => {
             res.json({ success: false });
         });
 });
+//_____________________________________________
 
 app.post("/login/verification", (req, res) => {
-    const { email } = req.body;
-    db.getLogin(email)
-        .then(({ rows }) => {
-            if (rows[0]) {
-                const secretCode = cryptoRandomString({ length: 6 });
-                //Send the email with the code to the specified email address using SES
-                db.storingCode(email, secretCode).then(() => {
-                    ses.sendEmail(email, secretCode);
-                    res.json({ success: true });
-                });
-            } else {
+    if (req.body.email) {
+        const { email } = req.body;
+        db.getLogin(email).then((results) => {
+            console.log("rows in getlogin", results);
+            if (results.length === 0) {
                 res.json({ success: false });
             }
-        })
-        .catch((err) => {
-            console.log("error in verification: ", err);
-            res.json({ success: false });
+            let code = crs({ length: 6 });
+
+            db.addCode(email, code).then(({ rows }) => {
+                console.log("row in addSecretcode", rows);
+                ses.sendEmail(email, code, "Data")
+                    .then(() => {
+                        res.json({ step: 2, success: true, error: false });
+                    })
+                    .catch((err) => {
+                        console.log("error in db getLogin: ", err);
+                        res.json({ success: false, error: true });
+                    })
+                    .catch((err) => {
+                        console.log("db.getLogin catch error: ", err);
+                        res.json({ success: false, error: true });
+                    });
+            });
         });
+    }
 });
 
-app.post("login/rest", (req, res) => {
-    // Find the code in the database by the email address in req.body
-    const { code, newPass, email } = req.body;
-    //Compare the code in req.body to the code from the database
-    db.interval(email)
-        .then(({ rows }) => {
-            //If they are the same
-            if (code === rows[0]) {
-                console.log("rows", rows[0]);
-                res.json({ success: true });
-                //hash the password in req.body
-                hash(newPass).then((hashPassword) => {
-                    db.updatePassword(hashPassword).then(() => {
-                        res.json({ success: true });
+app.post("/login/rest", (req, res) => {
+    const { code, newpass } = req.body;
+    if (code && newpass) {
+        db.getCodeIntreval()
+            .then(({ rows }) => {
+                console.log("getCodeIntreval", rows);
+                if (rows.length === 0) {
+                    res.json({ success: false });
+                }
+                if (code == rows[0].code) {
+                    hash(newpass).then((hashPassword) => {
+                        db.updatePassword(rows[0].email, hashPassword).then(
+                            () => {
+                                res.json({ step: 3, success: true });
+                            }
+                        );
                     });
-                });
-            } else {
+                } else {
+                    res.json({ success: false });
+                }
+            })
+            .catch((err) => {
+                console.log("error in db rest: ", err);
                 res.json({ success: false });
-            }
-        })
-        .catch((err) => {
-            console.log("error in db rest: ", err);
-            res.json({ success: false });
-        });
+            });
+    }
 });
+
+//____________________________
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

@@ -19,33 +19,33 @@ module.exports.getLogin = (email) => {
     return db.query(q, params);
 };
 
-module.exports.storingCode = (code, email) => {
-    const q = `INSERT INTO reset_code (email, code)
-    VALUES ($1, $2)
-    ON CONFLICT (email) DO
-    UPDATE SET code = $1;
-    WHERE email =$2`;
+//_______________________________________________
 
-    const params = [code, email];
-
+module.exports.addCode = (email, secret_code) => {
+    const q = `
+        INSERT INTO resetPass  (email, code)
+        VALUES ($1, $2)
+        RETURNING *
+    `;
+    const params = [email, secret_code];
     return db.query(q, params);
 };
 
-module.exports.interval = (code) => {
-    const q = `SELECT code FROM rest_code
-WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes'`;
+module.exports.getCodeIntreval = () => {
+    const q = `
+        SELECT * FROM resetPass 
+WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '3 minutes';
+    `;
 
-    const params = [code];
-
-    return db.query(q, params);
+    return db.query(q);
 };
 
-module.exports.updatePassword = (code, email) => {
-    const q = `UPDATE users
-SET password_hash = '$1'
-WHERE email =$2`;
-
-    const params = [code, email];
-
+module.exports.updatePassword = (email, password_hash) => {
+    const q = `
+        UPDATE users
+SET password_hash = $2
+WHERE email = $1
+    `;
+    const params = [email, password_hash];
     return db.query(q, params);
 };
