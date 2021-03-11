@@ -8,6 +8,32 @@ const db = require("./db");
 const csurf = require("csurf");
 const crs = require("crypto-random-string");
 const ses = require("./ses");
+const s3 = require("./s3");
+
+///upload///
+const config = require("./config");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
+});
+
+///upload///
 
 app.use(compression());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
@@ -139,6 +165,8 @@ app.post("/login/rest", (req, res) => {
 });
 
 //____________________________
+
+//____________________________________________________________________
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

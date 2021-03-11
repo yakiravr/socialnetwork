@@ -49,3 +49,13 @@ WHERE email = $1
     const params = [email, password_hash];
     return db.query(q, params);
 };
+//_______________________________________________
+module.exports.addImage = (imageurl, id) => {
+    const q = `UPDATE users
+        SET imageurl= $1
+        WHERE id = $2
+        RETURNING imageurl
+    `;
+    const params = [imageurl, id];
+    return db.query(q, params);
+};
