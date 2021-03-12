@@ -192,6 +192,9 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 });
 //____________________________________________________________________
 
+app.post("/bio", () => {});
+//____________________________________________________________________
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
