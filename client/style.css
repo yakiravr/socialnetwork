@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: grey;
 }
 
 #logo {
@@ -74,14 +74,82 @@ textarea:focus {
     margin: auto;
 }
 
-.on-reset input {
-}
-.on-reset button {
-}
-
 .error {
     color: crimson;
 }
 
-.Link {
+.logo {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.logo_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.logoInimg {
+    margin: 1rem;
+    width: 150px;
+    height: 150px;
+}
+
+/*  _______________________________ */
+
+#logo {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    margin-top: 0;
+    margin-left: 1500px;
+}
+
+#containerUploader {
+    position: fixed;
+    background-color: rgb(226, 226, 200);
+    color: black;
+    width: 550px;
+    height: 150px;
+    text-align: center;
+}
+
+.profilepic {
+    width: 300px;
+    height: 300px;
+    float: left;
+    object-fit: cover;
+    margin-top: 100px;
+    margin-left: 0;
+    border: 1px solid black;
+    margin-top: 0;
+}
+
+.pic {
+    display: inline-block;
+    width: 50%;
+}
+
+#appContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#upload {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    float: left;
+}
+
+#name {
+    position: relative;
+    float: left;
+    color: burlywood;
+    margin-left: 0;
 }

@@ -2,81 +2,63 @@ import { Component } from "react";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
-import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            first: "me myself",
-            last: "and i",
-            image: "",
-            bio: "",
+            first: "",
+            last: "",
+            imgUrl: "",
+            success: true,
+            error: false,
             uploaderIsVisible: false,
         };
     }
 
     componentDidMount() {
-        axios.get("/user").then((res) => {
-            const { imageurl, first, last, bio } = res.data.user;
-            this.setState({ imageurl, first, last, bio });
+        axios.get("/user").then(({ data }) => {
+            if (data) {
+                this.setState({
+                    first: data.Iteration.first,
+                    last: data.Iteration.last,
+                    imgUrl: data.Iteration.imgurl,
+                });
+            } else {
+                this.setState({ error: true });
+            }
         });
     }
 
     toggleUploader() {
-        // console.log('toggleModal function is running!!!');
         this.setState({
             uploaderIsVisible: !this.state.uploaderIsVisible,
         });
     }
 
-    updatePicture(uploadedUrl) {
-        console.log("UPLOADED URL:", uploadedUrl);
-        this.setState({
-            image: uploadedUrl,
-            uploaderIsVisible: false,
-        });
-    }
-
-    setBio(newBio) {
-        this.setState({
-            bio: newBio,
-        });
-    }
-
-    setProfile(newProfile) {
-        console.log("newProfile", newProfile);
-        this.setState({
-            profile: newProfile,
-        });
+    methodUploadInApp(arg) {
+        this.setState({ imgUrl: arg });
     }
 
     render() {
         return (
-            <div>
-                <BrowserRouter>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => (
-                            <ProfilePic
-                                first={this.state.first}
-                                last={this.state.last}
-                                image={this.state.image}
-                            />
-                        )}
-                    />
-                </BrowserRouter>
+            <div id="appContainer">
+                <img id="logo" src="icon.png" />
 
-                <h2 onClick={() => this.toggleUploader()}>
-                    Click here!! Changing uploaderIsVisible state with a
-                    method!!
-                </h2>
+                <ProfilePic
+                    imgUrl={this.state.imgUrl}
+                    toggleUploader={() => this.toggleUploader()}
+                />
+                <h1 id="name">{this.state.first}</h1>
                 {this.state.uploaderIsVisible && (
-                    <Uploader
-                        updatePicture={this.uploadedUrl}
-                        toggleModal={() => this.toggleModal()}
-                    />
+                    <div id="upload">
+                        <Uploader
+                            methodUploadInApp={(imgUrl) =>
+                                this.methodUploadInApp(imgUrl)
+                            }
+                            toggleUploader={() => this.toggleUploader()}
+                        />
+                    </div>
                 )}
             </div>
         );

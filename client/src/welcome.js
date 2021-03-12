@@ -7,8 +7,8 @@ export default function Welcome() {
     return (
         <div id="welcome">
             <h1>Welcome</h1>
-            <div id="welcome-logo">
-                <img src="/logo.png" />
+            <div className="logo_container">
+                <img className="logo" src="icon.png" alt="Scream" />
             </div>
             <HashRouter>
                 <div>

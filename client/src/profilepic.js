@@ -1,11 +1,14 @@
-export default function ProfilePic({ first, last, imageUrl }) {
-    imageUrl = imageUrl || "default.png";
+export default function ProfilePic(props) {
+    const imgUrl = props.imgUrl || "default.png";
+
     return (
-        <div>
-            {first} {last}
-            <div className="Pic">
-                <img className="profile-pic" src={imageUrl} />
-            </div>
+        <div className="pic">
+            <img
+                className="profilepic"
+                src={imgUrl}
+                alt={props.last}
+                onClick={props.toggleUploader}
+            />
         </div>
     );
 }

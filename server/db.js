@@ -50,12 +50,23 @@ WHERE email = $1
     return db.query(q, params);
 };
 //_______________________________________________
-module.exports.addImage = (imageurl, id) => {
-    const q = `UPDATE users
-        SET imageurl= $1
-        WHERE id = $2
-        RETURNING imageurl
+
+module.exports.uploadImg = (imgUrl, userId) => {
+    const q = `
+    UPDATE users
+    SET imgurl  = $1
+    WHERE id = $2
     `;
-    const params = [imageurl, id];
+    const params = [imgUrl, userId];
+    return db.query(q, params);
+};
+
+module.exports.getUser = (id) => {
+    const q = `
+    SELECT first, last, imgurl 
+    FROM users
+    WHERE id = $1
+    `;
+    const params = [id];
     return db.query(q, params);
 };

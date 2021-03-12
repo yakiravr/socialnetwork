@@ -111,7 +111,7 @@ export default class ResetPassword extends React.Component {
                     <button onClick={() => this.handleClickReset()}>
                         Submit
                     </button>
-                    <Link to="/" className="Link">
+                    <Link to="/" className="">
                         Back
                     </Link>
                 </div>
@@ -121,7 +121,7 @@ export default class ResetPassword extends React.Component {
                 <div className="on-reset">
                     <h1>Password Updated </h1>
 
-                    <Link to="/login" className="Link">
+                    <Link to="/login" className="">
                         Back
                     </Link>
                 </div>

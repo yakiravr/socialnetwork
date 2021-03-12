@@ -9,9 +9,9 @@ const csurf = require("csurf");
 const crs = require("crypto-random-string");
 const ses = require("./ses");
 const s3 = require("./s3");
-
+const config = require("./config.json");
 ///upload///
-const config = require("./config");
+
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 
@@ -32,7 +32,6 @@ const uploader = multer({
         fileSize: 2097152,
     },
 });
-
 ///upload///
 
 app.use(compression());
@@ -165,7 +164,32 @@ app.post("/login/rest", (req, res) => {
 });
 
 //____________________________
+app.get("/user", (req, res) => {
+    const userId = req.session.userId;
+    db.getUser(userId)
+        .then(({ rows }) => {
+            res.json({ Iteration: rows[0] });
+        })
+        .catch((err) => {
+            console.log("error in getUser in /user get:", err);
+            res.json({ success: false });
+        });
+});
 
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    const { filename } = req.file;
+    const url = config.s3Url + filename;
+
+    db.uploadImg(url, req.session.userId)
+        .then(({ rows }) => {
+            console.log("yessss it works a pic uploaded!", rows);
+            res.json({ success: true, imgUrl: url });
+        })
+        .catch((error) => {
+            console.log("eror in post upload:", error);
+            res.json({ error: true });
+        });
+});
 //____________________________________________________________________
 
 app.get("*", function (req, res) {
