@@ -6,7 +6,6 @@ export default class BioEditor extends React.Component {
         super(props);
         this.state = {
             btnTxt: "",
-            txtArea: false,
         };
     }
     componentDidMount() {
