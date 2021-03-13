@@ -42,12 +42,12 @@ export default class Registration extends React.Component {
                 <h1>Registration</h1>
                 {this.state.error && <p>something went wrong :(</p>}
                 <input
-                    name="first"
+                    name="firstname"
                     placeholder="first"
                     onChange={(e) => this.handleChange(e)}
                 />
                 <input
-                    name="last"
+                    name="lastname"
                     placeholder="last"
                     onChange={(e) => this.handleChange(e)}
                 />

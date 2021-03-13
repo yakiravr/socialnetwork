@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS resetPass;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    first VARCHAR NOT NULL CHECK (first <> ''),
-    last VARCHAR NOT NULL CHECK (last <> ''),
+    firstname VARCHAR NOT NULL CHECK ( firstname <> ''),
+    lastname VARCHAR NOT NULL CHECK ( lastname <> ''),
     email VARCHAR NOT NULL UNIQUE CHECK (email <> ''),
     password_hash VARCHAR NOT NULL CHECK (password_hash <> ''),
     imgUrl TEXT,

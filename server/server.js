@@ -60,10 +60,10 @@ app.get("/welcome", (req, res) => {
     }
 });
 app.post("/registration", (req, res) => {
-    const { first, last, email, password } = req.body;
+    const { firstname, lastname, email, password } = req.body;
     hash(password)
         .then((hashPassword) => {
-            db.addUser(first, last, email, hashPassword)
+            db.addUser(firstname, lastname, email, hashPassword)
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
                     console.log("rows", rows[0].id);
@@ -168,7 +168,7 @@ app.get("/user", (req, res) => {
     const userId = req.session.userId;
     db.getUser(userId)
         .then(({ rows }) => {
-            res.json({ Iteration: rows[0] });
+            res.json({ rows });
         })
         .catch((err) => {
             console.log("error in getUser in /user get:", err);
@@ -191,8 +191,17 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         });
 });
 //____________________________________________________________________
-
-app.post("/bio", () => {});
+app.post("/bio", (req, res) => {
+    const userId = req.session.userId;
+    const { bio } = req.body;
+    db.updateBio(bio, userId)
+        .then(({ rows }) => {
+            res.json({ data: rows });
+        })
+        .catch((error) => {
+            console.log("error in bio post server", error);
+        });
+});
 //____________________________________________________________________
 
 app.get("*", function (req, res) {

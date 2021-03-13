@@ -99,11 +99,11 @@ textarea:focus {
 
 /*  _______________________________ */
 
-#logo {
+#app-logo img {
     position: absolute;
     width: 150px;
     height: 150px;
-    margin-top: 0;
+    margin-top: 0px;
     margin-left: 1500px;
 }
 
@@ -116,25 +116,9 @@ textarea:focus {
     text-align: center;
 }
 
-.profilepic {
-    width: 300px;
-    height: 300px;
-    float: left;
-    object-fit: cover;
-    margin-top: 100px;
-    margin-left: 0;
-    border: 1px solid black;
-    margin-top: 0;
-}
-
-.pic {
-    display: inline-block;
-    width: 50%;
-}
-
 #appContainer {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 #upload {
@@ -147,9 +131,24 @@ textarea:focus {
     float: left;
 }
 
-#name {
-    position: relative;
+/*  _______________________________ */
+#profile-container {
+    text-align: center;
+
+    margin-right: 690px;
+}
+
+#profile-container img {
+    display: flex;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+img {
+    display: flex;
+    width: 110px;
+    height: 110px;
+    margin-top: 12px;
     float: left;
-    color: burlywood;
-    margin-left: 0;
 }
