@@ -3,12 +3,12 @@ import ProfilePic from "./profilepic";
 
 export default function Profile(props) {
     return (
-        <div id="profile-container">
-            <h1>
-                {props.firstname}
-                <br></br>
-                {props.lastname}
-            </h1>
+        <div id="profileContainer">
+            <div className="name">
+                <h2>
+                    {props.firstname} {props.lastname}
+                </h2>
+            </div>
             <div id="">
                 <ProfilePic
                     imgUrl={props.imgUrl}
@@ -16,8 +16,9 @@ export default function Profile(props) {
                     toggleUploader={() => props.toggleUploader()}
                 />
             </div>
+
             <BioEditor BioInApp={(bio) => props.BioInApp(bio)} />
-            {props.bio}
+            <p className="bio"> {props.bio}</p>
         </div>
     );
 }

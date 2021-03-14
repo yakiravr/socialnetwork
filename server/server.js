@@ -203,6 +203,21 @@ app.post("/bio", (req, res) => {
         });
 });
 //____________________________________________________________________
+app.get("/api/user/:id", (req, res) => {
+    db.getUser(req.params.id)
+        .then(({ rows }) => {
+            if (!req.session.userId) {
+                res.json({ error: true, success: false });
+            } else {
+                res.json({ rows });
+            }
+        })
+        .catch((error) => {
+            console.log("error /api/user/:id server: ", error);
+        });
+});
+
+//____________________________________________________________________
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

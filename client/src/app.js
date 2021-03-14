@@ -4,6 +4,7 @@ import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
+import { OtherProfile } from "./otherprofile";
 
 export default class App extends Component {
     constructor() {
@@ -20,19 +21,24 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        axios.get("/user").then(({ data }) => {
-            let user = data.rows[0];
-            if (data) {
-                this.setState({
-                    firstname: user.firstname,
-                    lastname: user.lastname,
-                    imgUrl: user.imgurl,
-                    bio: user.bio,
-                });
-            } else {
-                this.setState({ error: true });
-            }
-        });
+        axios
+            .get("/user")
+            .then(({ data }) => {
+                let user = data.rows[0];
+                if (data) {
+                    this.setState({
+                        firstname: user.firstname,
+                        lastname: user.lastname,
+                        imgUrl: user.imgurl,
+                        bio: user.bio,
+                    });
+                } else {
+                    this.setState({ error: true });
+                }
+            })
+            .catch((error) => {
+                console.log("err in axios POST /user: ", error);
+            });
     }
 
     toggleUploader() {
@@ -53,7 +59,7 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <div id="app-logo">
-                    <img id="logo" src="icon.png" />
+                    <img id="logo" src="../icon.png" />
                 </div>
                 <div id="appContainer">
                     <ProfilePic
@@ -71,6 +77,16 @@ export default class App extends Component {
                                 imgUrl={this.state.imgUrl}
                                 toggleUploader={() => this.toggleUploader()}
                                 BioInApp={(bio) => this.BioInApp(bio)}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/user/:id"
+                        render={(props) => (
+                            <OtherProfile
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
                             />
                         )}
                     />

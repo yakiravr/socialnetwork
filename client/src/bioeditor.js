@@ -9,7 +9,7 @@ export default class BioEditor extends React.Component {
         };
     }
     componentDidMount() {
-        if (!this.props.bio) {
+        if (this.props.bio) {
             this.setState({
                 btnTxt: "edit",
             });
@@ -49,21 +49,22 @@ export default class BioEditor extends React.Component {
     render() {
         return (
             <>
-                <h1>
-                    Who am I?
+                <h1 className="bio">
+                    <>Who am I?</>
                     <br></br>
                     {this.props.bio}
                 </h1>
-
                 <br></br>
                 {!this.state.target && (
-                    <button
-                        onClick={() => {
-                            this.setState({ target: true });
-                        }}
-                    >
-                        {this.state.btnTxt}
-                    </button>
+                    <div className="btmEdit">
+                        <button
+                            onClick={() => {
+                                this.setState({ target: true });
+                            }}
+                        >
+                            {this.state.btnTxt}
+                        </button>
+                    </div>
                 )}
                 <br></br>
                 {this.state.target && (
@@ -71,12 +72,14 @@ export default class BioEditor extends React.Component {
                 )}
 
                 <br></br>
+
                 {this.state.target && (
                     <textarea
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
                     />
                 )}
+
                 <br></br>
             </>
         );

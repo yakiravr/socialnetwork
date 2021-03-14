@@ -3,7 +3,7 @@ export default function ProfilePic(props) {
 
     return (
         <div>
-            <div>
+            <div className="pic">
                 <img
                     src={imgUrl}
                     alt={props.lastname}

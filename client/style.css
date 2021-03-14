@@ -2,9 +2,54 @@ body {
     background-color: grey;
 }
 
+#registration {
+    margin-top: 200px;
+    margin: 0 auto;
+    width: 800px;
+}
+#login_in_egistration {
+    width: 50px;
+    height: 20px;
+    background: #999;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+#rest_in_egistration {
+    width: 100px;
+    height: 20px;
+    background: #999;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
+.login {
+    margin-top: 200px;
+    margin: 0 auto;
+    width: 200px;
+}
+
 #logo {
     justify-items: center;
     size: 20px;
+}
+
+.submitReg {
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 350px;
+    width: 20px;
+    margin-top: 10px;
+}
+
+.loginBtn {
+    position: fixed;
+    margin-top: 1px;
+    margin-left: 60px;
+    width: 20px;
+    height: 5px;
 }
 
 input {
@@ -33,13 +78,6 @@ textarea:focus {
     outline: none;
     border: 1px solid blue;
     box-shadow: 0 0 5px blue;
-}
-
-#login_in_egistration {
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-    margin-left: 760px;
 }
 
 /* /*___________ */
@@ -132,13 +170,15 @@ textarea:focus {
 }
 
 /*  _______________________________ */
-#profile-container {
+#profileContainer {
+    position: relative;
     text-align: center;
-
-    margin-right: 690px;
+    width: 200px;
+    margin-right: 850px;
+    margin-top: 100px;
 }
 
-#profile-container img {
+#profileContainer img {
     display: flex;
     width: 300px;
     height: 300px;
@@ -147,8 +187,34 @@ textarea:focus {
 
 img {
     display: flex;
-    width: 110px;
-    height: 110px;
+    width: 130px;
+    height: 140px;
     margin-top: 12px;
-    float: left;
 }
+
+.name h1 {
+    position: absolute;
+    margin-left: 700px;
+    object-position: center;
+    justify-content: space-between;
+}
+
+.name h1 {
+    position: absolute;
+    margin-left: 700px;
+    object-position: center;
+    justify-content: space-between;
+}
+
+.btmEdit button {
+    margin-top: 12px;
+    margin: 0 auto;
+    width: 50px;
+}
+
+.bio p {
+    margin-top: 12px;
+    margin: 0 auto;
+    width: 50px;
+}
+/*  _______________________________ */

@@ -69,7 +69,10 @@ export default class ResetPassword extends React.Component {
         if (step == 1) {
             return (
                 <div className="on-reset">
-                    <h1>Reset Password</h1>
+                    <h1>rest password</h1>
+                    <div className="logo_container">
+                        <img className="logo" src="icon.png" alt="Scream" />
+                    </div>
                     <span>Email</span>
 
                     <input

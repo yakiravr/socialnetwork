@@ -38,25 +38,33 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-                <h1>Login</h1>
-                {this.state.error && <p>something went wrong :(</p>}
-                <input
-                    name="email"
-                    type="text"
-                    placeholder="Email Address"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <div id="login_in_egistration">
+                <div id="rest_in_egistration">
                     <Link to="/verification">rest password</Link>
                 </div>
-
-                <button onClick={() => this.handleClick()}>Login!</button>
+                <div className="login">
+                    <div className="logo_container">
+                        <img className="logo" src="icon.png" alt="Scream" />
+                    </div>
+                    <h1>Login</h1>
+                    {this.state.error && <p>something went wrong :(</p>}
+                    <input
+                        name="email"
+                        type="text"
+                        placeholder="Email Address"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <input
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <div className="loginBtn">
+                        <button onClick={() => this.handleClick()}>
+                            Login!
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
