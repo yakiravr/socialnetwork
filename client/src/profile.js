@@ -4,7 +4,7 @@ import ProfilePic from "./profilepic";
 export default function Profile(props) {
     return (
         <div id="profileContainer">
-            <div className="name">
+            <div>
                 <h2>
                     {props.firstname} {props.lastname}
                 </h2>
@@ -16,9 +16,10 @@ export default function Profile(props) {
                     toggleUploader={() => props.toggleUploader()}
                 />
             </div>
-
-            <BioEditor BioInApp={(bio) => props.BioInApp(bio)} />
-            <p className="bio"> {props.bio}</p>
+            <BioEditor
+                bio={props.bio}
+                bioInApp={(bio) => props.bioInApp(bio)}
+            />
         </div>
     );
 }

@@ -139,10 +139,10 @@ textarea:focus {
 
 #app-logo img {
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
     margin-top: 0px;
-    margin-left: 1500px;
+    margin-left: 1600px;
 }
 
 #containerUploader {
@@ -187,34 +187,9 @@ textarea:focus {
 
 img {
     display: flex;
-    width: 130px;
-    height: 140px;
+    width: 80px;
+    height: 80px;
     margin-top: 12px;
 }
 
-.name h1 {
-    position: absolute;
-    margin-left: 700px;
-    object-position: center;
-    justify-content: space-between;
-}
-
-.name h1 {
-    position: absolute;
-    margin-left: 700px;
-    object-position: center;
-    justify-content: space-between;
-}
-
-.btmEdit button {
-    margin-top: 12px;
-    margin: 0 auto;
-    width: 50px;
-}
-
-.bio p {
-    margin-top: 12px;
-    margin: 0 auto;
-    width: 50px;
-}
 /*  _______________________________ */

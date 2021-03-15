@@ -76,6 +76,7 @@ module.exports.updateBio = (bio, userId) => {
     UPDATE users
     SET bio = $1
     WHERE id = $2
+    RETURNING bio;
     `;
     const params = [bio, userId];
     return db.query(q, params);

@@ -5,83 +5,74 @@ export default class BioEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            btnTxt: "",
+            edit: false,
         };
     }
+
     componentDidMount() {
+        console.log("bio passed to BioEditor:", this.props.bio);
         if (this.props.bio) {
-            this.setState({
-                btnTxt: "edit",
-            });
+            this.setState({ edit: true });
         } else {
             this.setState({
-                btnTxt: "add",
+                edit: false,
             });
         }
     }
 
-    handleClick() {
-        axios
-            .post("/bio", { bio: this.state.target })
-            .then(({ data }) => {
-                console.log("bio post", data);
-                if (data) {
-                    this.props.BioInApp(this.state.target);
-                    this.setState({
-                        target: false,
-                    });
-                } else {
-                    this.setState({ target: true });
-                }
-            })
-            .catch((error) => console.log("err in axios POST /bio: ", error));
+    handleChange(e) {
+        this.setState({ target: e.target.value });
     }
 
-    handleChange(e) {
-        this.setState(
-            {
-                target: e.target.value,
-            },
-            () => console.log("this.state after setState: ")
-        );
+    SaveBttn() {
+        if (this.state.bio == null) {
+            const bioTarget = {
+                bio: this.state.target,
+            };
+            axios
+                .post("/bio", bioTarget)
+                .then((res) => {
+                    this.props.bioInApp(res.data.data[0].bio);
+                    console.log("res fata info", res.data.data[0].bio);
+                    this.setState({ target: !null, edit: false });
+                })
+                .catch((error) => {
+                    console.log("error BioEditor: ", error);
+                });
+        } else {
+            this.setState({ edit: false });
+        }
+    }
+
+    insertBio() {
+        this.setState({ edit: true });
     }
 
     render() {
-        return (
-            <>
-                <h1 className="bio">
-                    <>Who am I?</>
-                    <br></br>
-                    {this.props.bio}
-                </h1>
-                <br></br>
-                {!this.state.target && (
-                    <div className="btmEdit">
-                        <button
-                            onClick={() => {
-                                this.setState({ target: true });
-                            }}
-                        >
-                            {this.state.btnTxt}
-                        </button>
-                    </div>
-                )}
-                <br></br>
-                {this.state.target && (
-                    <button onClick={() => this.handleClick()}>SAVE</button>
-                )}
-
-                <br></br>
-
-                {this.state.target && (
+        if (this.state.edit == false && this.props.bio) {
+            return (
+                <div className="editContainer">
+                    <p>{this.props.bio}</p>
+                    <p onClick={() => this.insertBio()}>Edit</p>
+                </div>
+            );
+        }
+        if (this.state.edit == true) {
+            return (
+                <div className="SaveBio">
                     <textarea
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
-                    />
-                )}
-
-                <br></br>
-            </>
-        );
+                    ></textarea>
+                    <p onClick={() => this.SaveBttn()}>Save Bio</p>
+                </div>
+            );
+        } else if (this.state.edit == false && !this.props.bio) {
+            return (
+                <div className="addBio">
+                    <p onClick={() => this.insertBio()}>Add Bio</p>
+                </div>
+            );
+        }
     }
 }

@@ -51,8 +51,11 @@ export default class App extends Component {
         this.setState({ imgUrl: arg });
     }
 
-    BioInApp(arg) {
-        this.setState({ bio: arg });
+    bioInApp(arg) {
+        console.log("update info in app,", arg);
+        this.setState({
+            bio: arg,
+        });
     }
 
     render() {
@@ -76,7 +79,7 @@ export default class App extends Component {
                                 bio={this.state.bio}
                                 imgUrl={this.state.imgUrl}
                                 toggleUploader={() => this.toggleUploader()}
-                                BioInApp={(bio) => this.BioInApp(bio)}
+                                bioInApp={(bio) => this.bioInApp(bio)}
                             />
                         )}
                     />
