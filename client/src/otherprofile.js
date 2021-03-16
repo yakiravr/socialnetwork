@@ -18,6 +18,7 @@ export class OtherProfile extends React.Component {
                         firstname: fakeUser.firstname,
                         lastname: fakeUser.lastname,
                         bio: fakeUser.bio,
+                        id: fakeUser.id,
                     });
                 } else {
                     this.props.history.push("/");

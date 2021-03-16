@@ -81,3 +81,22 @@ module.exports.updateBio = (bio, userId) => {
     const params = [bio, userId];
     return db.query(q, params);
 };
+
+//_______________________________________________
+module.exports.recentUsers = () => {
+    const q = `
+    SELECT * FROM users
+    ORDER BY id DESC
+    LIMIT 4
+    `;
+    return db.query(q);
+};
+
+module.exports.searchResults = (val) => {
+    return db.query(
+        `SELECT * FROM users
+        WHERE firstname ILIKE $1 OR lastname ILIKE $1
+        LIMIT 5;`,
+        [val + "%"]
+    );
+};

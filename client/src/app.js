@@ -5,6 +5,7 @@ import Uploader from "./uploader";
 import Profile from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import { OtherProfile } from "./otherprofile";
+import FindPeople from "./findPeople";
 
 export default class App extends Component {
     constructor() {
@@ -83,6 +84,9 @@ export default class App extends Component {
                             />
                         )}
                     />
+
+                    <Route path="/users" render={() => <FindPeople />} />
+
                     <Route
                         path="/user/:id"
                         render={(props) => (
@@ -93,6 +97,7 @@ export default class App extends Component {
                             />
                         )}
                     />
+
                     {this.state.uploaderIsVisible && (
                         <div id="upload">
                             <Uploader

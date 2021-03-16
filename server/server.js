@@ -219,7 +219,30 @@ app.get("/api/user/:id", (req, res) => {
 });
 
 //____________________________________________________________________
+app.get("/api/users/:most_recently", (req, res) => {
+    db.recentUsers()
+        .then(({ rows }) => {
+            res.json({ success: true, recUsers: rows });
+        })
+        .catch((error) => {
+            console.log("error in get most recent", error);
+            res.json({ success: false, error: true });
+        });
+});
 
+app.get("/api/search/:users", (req, res) => {
+    db.searchResults(req.params.users)
+        .then(({ rows }) => {
+            if (rows) {
+                res.json({ success: true, error: false, users: rows });
+            }
+        })
+        .catch((error) => {
+            console.log("error in search", error);
+            res.json({ error: true, success: false });
+        });
+});
+//____________________________________________________________________
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
