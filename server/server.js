@@ -248,59 +248,68 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
 });
 //____________________________________________________________________
-app.get("/friend_status/:id", (req, res) => {
-    db.friendsOrNot(req.params.id, req.session.userId)
+app.get("/friendshipCheck/:idRoute", (req, res) => {
+    db.getFriendshipStatus(req.session.userId, req.params.idRoute)
         .then(({ rows }) => {
-            console.log("rows in/friend_status/:id", rows);
-            if (rows[0] == undefined) {
-                res.json({ success: false });
+            console.log("rows in friendshipCheck: ", rows);
+            if (rows[0].length === 0) {
+                res.json({ arrayData: false });
             } else if (rows[0].accepted == true) {
-                res.json({ success: true, accepted: true });
+                res.json({ arrayData: true, accepted: true });
             } else if (
-                rows[0].receiver_id == req.session.userId &&
-                rows[0].accepted === false
+                rows[0].accepted == false &&
+                rows[0].receiver_id == req.session.userId
             ) {
-                res.json({ success: true, Accept: true });
-            } else if (rows[0].accepted === false) {
-                res.json({ success: true, Cancel: true });
+                res.json({ arrayData: true, acceptedfriendship: true });
+            } else if (
+                rows[0].accepted == false &&
+                rows[0].sender_id == req.session.userId
+            ) {
+                res.json({ arrayData: true });
             } else {
-                res.json({ success: false });
+                res.json({ arrayData: false });
             }
         })
         .catch((error) => {
-            console.log("Error set friend_status :", error);
+            console.log("Error in get friendshipCheck: ", error);
         });
 });
 
-app.post("/friend_request/:id", (req, res) => {
-    db.friendRequest(req.params.id, req.session.userId)
-        .then(({ rows }) => {
-            res.json(rows);
-        })
-        .catch((error) => {
-            console.log("error in friendRequest server post:", error);
-        });
-});
-
-app.post("/accept_request/:id", (req, res) => {
-    db.acceptFriendRequest(req.params.id, req.session.userId)
+app.post("/request/:idRoute", (req, res) => {
+    db.requestFriendship(req.session.userId, req.params.idRoute)
         .then(() => {
-            res.json({ success: true });
+            res.json({
+                arrayData: true,
+            });
         })
         .catch((error) => {
-            console.log("error in acceptFriendRequest server post: ", error);
+            console.log("Error in post request:", error);
+            res.json({ arrayData: false });
         });
 });
 
-app.post("/cancel_request/:id", (req, res) => {
-    db.removeFriendship(req.params.id, req.session.userId)
+app.post("/accepted/:idRoute", (req, res) => {
+    db.acceptFriendship(req.session.userId, req.params.idRoute)
         .then(({ rows }) => {
             res.json(rows);
         })
         .catch((error) => {
-            console.log("error in removeFriendship server post: ", error);
+            console.log("Error in post accepted:", error);
+            res.json({ arrayData: false });
         });
 });
+
+app.post("/cancel/:idRoute", (req, res) => {
+    db.cancelriendship(req.session.userId, req.params.idRoute)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("Error in post cancel:", err);
+            res.json({ arrayData: false });
+        });
+});
+
 //____________________________________________________________________
 
 app.get("*", function (req, res) {

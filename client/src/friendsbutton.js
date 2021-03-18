@@ -1,73 +1,56 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
 
-export function FriendButton(props) {
-    const [buttonText, setButtonText] = useState();
+export function FriendButton(idRoute) {
+    const [buttonText, setButtonText] = useState("Send Friend Request");
 
     useEffect(() => {
-        axios.get("/friend_status/" + props.match).then(({ data }) => {
-            if (data) {
+        axios.get("/friendshipCheck/" + idRoute.match).then(({ data }) => {
+            if (data.arrayData) {
                 console.log("Got state of friendship!");
                 if (data.accepted) {
-                    setButtonText("End Friend Request");
-                } else if (data.Accept) {
+                    setButtonText("End Friendship");
+                } else if (data.acceptedfriendship) {
                     setButtonText("Accept Friend Request");
-                } else if (data.Cancel) {
+                } else {
                     setButtonText("Cancel Friend Request");
                 }
-            } else {
-                setButtonText("Make Friend Request");
             }
         });
     }, []);
 
-    function handleClick() {
-        console.log("handelclick", buttonText);
-        if (buttonText === "Make Friend Request") {
+    const handleClick = () => {
+        if (buttonText == "Send Friend Request") {
             axios
-                .post("/friend_request/" + props.match)
+                .post("/request/" + idRoute.match)
                 .then(() => {
                     setButtonText("Cancel Friend Request");
                 })
-                .catch(function (error) {
+                .catch((error) => {
                     console.log("error in axios.post /friendrequest: ", error);
                 });
         } else if (
-            buttonText === "Cancel Friend Request" ||
-            buttonText === "End Friend Request"
+            buttonText == "Cancel Friend Request" ||
+            buttonText == "End Friendship"
         ) {
             axios
-                .post("/cancel_request/" + props.match)
+                .post("/cancel/" + idRoute.match)
                 .then(() => {
-                    setButtonText("Make Friend Request");
+                    setButtonText("Send Friend Request");
                 })
                 .catch((error) => {
-                    console.log(
-                        "error in axios.post /cancel_request/: ",
-                        error
-                    );
+                    console.log("error in axios.post /friendrequest: ", error);
                 });
         } else if (buttonText == "Accept Friend Request") {
-            axios
-                .post("/accept_request/" + props.match)
-                .then(({ data }) => {
-                    console.log("data accept req", data);
-                    if (data) {
-                        setButtonText("End Friend Request");
-                    }
-                })
-                .catch((error) => {
-                    console.log(
-                        "error in axios.post /accept_request/: ",
-                        error
-                    );
-                });
+            axios.post("/accepted/" + idRoute.match).then(() => {
+                setButtonText("End Friendship");
+            });
         }
-    }
+    };
 
     return (
         <div>
-            <button id="friend-in-friendsBtn" onClick={handleClick}>
+            <button id="requestBttn" onClick={handleClick}>
                 {buttonText}
             </button>
         </div>

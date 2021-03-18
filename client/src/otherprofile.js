@@ -19,7 +19,6 @@ export class OtherProfile extends React.Component {
                         firstname: fakeUser.firstname,
                         lastname: fakeUser.lastname,
                         bio: fakeUser.bio,
-                        id: fakeUser.id,
                     });
                 } else {
                     this.props.history.push("/");
@@ -34,15 +33,14 @@ export class OtherProfile extends React.Component {
         return (
             <div>
                 <div id="profileContainer">
-                    <div id="friendsbtn">
-                        <FriendButton match={this.props.match.params.id} />
-                    </div>
                     <h3 className="name">
                         {this.state.firstname} {this.state.lastname}
                     </h3>
                     <img src={this.state.imgUrl} />
                     <p className="bio">{this.state.bio}</p>
                 </div>
+
+                <FriendButton match={this.props.match.params.id} />
             </div>
         );
     }
