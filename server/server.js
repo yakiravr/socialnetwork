@@ -251,19 +251,24 @@ app.get("/logout", (req, res) => {
 app.get("/friend_status/:id", (req, res) => {
     db.friendsOrNot(req.params.id, req.session.userId)
         .then(({ rows }) => {
-            if (rows[0] == null) {
-                console.log("Friendship status: ", rows);
-                res.json({ make: true, success: true });
-            } else if (rows[0] !== req.session.userId) {
-                res.json({ Accept: true, success: true });
-            } else if (rows[0] == true && rows[0] == req.session.userId) {
-                res.json({ Unfriend: true, success: true });
+            console.log("rows in/friend_status/:id", rows);
+            if (rows[0] == undefined) {
+                res.json({ success: false });
+            } else if (rows[0].accepted == true) {
+                res.json({ success: true, accepted: true });
+            } else if (
+                rows[0].receiver_id == req.session.userId &&
+                rows[0].accepted === false
+            ) {
+                res.json({ success: true, Accept: true });
+            } else if (rows[0].accepted === false) {
+                res.json({ success: true, Cancel: true });
             } else {
-                res.json({ cancel: true, success: true });
+                res.json({ success: false });
             }
         })
         .catch((error) => {
-            console.log("error in friendsOrNot server get:", error);
+            console.log("Error set friend_status :", error);
         });
 });
 

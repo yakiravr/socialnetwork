@@ -5,26 +5,24 @@ export function FriendButton(props) {
     const [buttonText, setButtonText] = useState();
 
     useEffect(() => {
-        axios
-            .get("/friend_status/" + props.match)
-            .then(({ data }) => {
-                if (data.make) {
-                    setButtonText("Make Friend Request");
+        axios.get("/friend_status/" + props.match).then(({ data }) => {
+            if (data) {
+                console.log("Got state of friendship!");
+                if (data.accepted) {
+                    setButtonText("End Friend Request");
                 } else if (data.Accept) {
                     setButtonText("Accept Friend Request");
-                } else if (data.Unfriend) {
-                    setButtonText("End Friend Request");
-                } else {
-                    data.Cancel;
+                } else if (data.Cancel) {
                     setButtonText("Cancel Friend Request");
                 }
-            })
-            .catch(function (error) {
-                console.log("error in axios.get /friendstatus/: ", error);
-            });
+            } else {
+                setButtonText("Make Friend Request");
+            }
+        });
     }, []);
-    function handleClick(e) {
-        e.preventDefault();
+
+    function handleClick() {
+        console.log("handelclick", buttonText);
         if (buttonText === "Make Friend Request") {
             axios
                 .post("/friend_request/" + props.match)
@@ -53,6 +51,7 @@ export function FriendButton(props) {
             axios
                 .post("/accept_request/" + props.match)
                 .then(({ data }) => {
+                    console.log("data accept req", data);
                     if (data) {
                         setButtonText("End Friend Request");
                     }
