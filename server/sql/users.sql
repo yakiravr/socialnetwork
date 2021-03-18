@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS resetPass;
 
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL CHECK ( firstname <> ''),
@@ -18,3 +19,5 @@ CREATE TABLE resetPass  (
     code VARCHAR NOT NULL CHECK (code <> ''),
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+

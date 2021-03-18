@@ -59,12 +59,23 @@ export default class App extends Component {
         });
     }
 
+    logout() {
+        axios.get("/logout").then(() => {
+            localStorage.clear();
+            window.location.reload();
+        });
+    }
+
     render() {
         return (
             <BrowserRouter>
                 <div id="app-logo">
                     <img id="logo" src="../icon.png" />
                 </div>
+                <div className="logOut" onClick={() => this.logout()}>
+                    Log-out
+                </div>
+
                 <div id="appContainer">
                     <ProfilePic
                         imgUrl={this.state.imgUrl}

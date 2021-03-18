@@ -242,7 +242,62 @@ app.get("/api/search/:users", (req, res) => {
             res.json({ error: true, success: false });
         });
 });
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
+});
 //____________________________________________________________________
+app.get("/friend_status/:id", (req, res) => {
+    db.friendsOrNot(req.params.id, req.session.userId)
+        .then(({ rows }) => {
+            if (rows[0] == null) {
+                console.log("Friendship status: ", rows);
+                res.json({ make: true, success: true });
+            } else if (rows[0] !== req.session.userId) {
+                res.json({ Accept: true, success: true });
+            } else if (rows[0] == true && rows[0] == req.session.userId) {
+                res.json({ Unfriend: true, success: true });
+            } else {
+                res.json({ cancel: true, success: true });
+            }
+        })
+        .catch((error) => {
+            console.log("error in friendsOrNot server get:", error);
+        });
+});
+
+app.post("/friend_request/:id", (req, res) => {
+    db.friendRequest(req.params.id, req.session.userId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("error in friendRequest server post:", error);
+        });
+});
+
+app.post("/accept_request/:id", (req, res) => {
+    db.acceptFriendRequest(req.params.id, req.session.userId)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((error) => {
+            console.log("error in acceptFriendRequest server post: ", error);
+        });
+});
+
+app.post("/cancel_request/:id", (req, res) => {
+    db.removeFriendship(req.params.id, req.session.userId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("error in removeFriendship server post: ", error);
+        });
+});
+//____________________________________________________________________
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
