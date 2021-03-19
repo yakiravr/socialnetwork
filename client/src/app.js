@@ -3,7 +3,7 @@ import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import { OtherProfile } from "./otherprofile";
 import FindPeople from "./findPeople";
 
@@ -75,7 +75,9 @@ export default class App extends Component {
                 <div className="logOut" onClick={() => this.logout()}>
                     Log-out
                 </div>
-
+                <Link to="/" className="profile">
+                    backe to my page
+                </Link>
                 <div id="appContainer">
                     <ProfilePic
                         imgUrl={this.state.imgUrl}

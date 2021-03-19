@@ -141,3 +141,4 @@ exports.cancelriendship = (userId, idRoute) => {
     const params = [userId, idRoute];
     return db.query(q, params);
 };
+//_______________________________________________

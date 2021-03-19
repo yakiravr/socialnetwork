@@ -1,7 +1,7 @@
-import React from "react";
+import { Component } from "react";
 import axios from "./axios";
 
-export default class BioEditor extends React.Component {
+export default class Bio extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,10 @@ export default class BioEditor extends React.Component {
     componentDidMount() {
         console.log("bio passed to BioEditor:", this.props.bio);
         if (this.props.bio) {
-            this.setState({ edit: true });
+            this.setState({
+                bio: this.props.bio,
+                // edit: true,
+            });
         } else {
             this.setState({
                 edit: false,
@@ -25,27 +28,27 @@ export default class BioEditor extends React.Component {
     }
 
     SaveBttn() {
-        if (this.state.bio == null) {
+        if (this.state.target !== null) {
             const bioTarget = {
                 bio: this.state.target,
             };
+            console.log("this.state.target:", this.state.target);
             axios
                 .post("/bio", bioTarget)
                 .then((res) => {
                     this.props.bioInApp(res.data.data[0].bio);
-                    console.log("res fata info", res.data.data[0].bio);
-                    this.setState({ target: !null, edit: false });
+                    this.setState({ edit: false });
                 })
                 .catch((error) => {
-                    console.log("error BioEditor: ", error);
+                    console.log("error from axios addbio: ", error);
                 });
         } else {
-            this.setState({ edit: false });
+            this.setState({ edit: true });
         }
     }
 
     insertBio() {
-        this.setState({ edit: true });
+        this.setState({ edit: true, bio: this.state.bio });
     }
 
     render() {
