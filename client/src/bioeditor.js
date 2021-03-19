@@ -27,7 +27,7 @@ export default class Bio extends Component {
         this.setState({ target: e.target.value });
     }
 
-    SaveBttn() {
+    SaveAddBttn() {
         if (this.state.target !== null) {
             const bioTarget = {
                 bio: this.state.target,
@@ -40,7 +40,7 @@ export default class Bio extends Component {
                     this.setState({ edit: false });
                 })
                 .catch((error) => {
-                    console.log("error from axios addbio: ", error);
+                    console.log("error from axios saveAdd: ", error);
                 });
         } else {
             this.setState({ edit: true });
@@ -67,7 +67,7 @@ export default class Bio extends Component {
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
                     ></textarea>
-                    <p onClick={() => this.SaveBttn()}>Save Bio</p>
+                    <p onClick={() => this.SaveAddBttn()}>Save Bio</p>
                 </div>
             );
         } else if (this.state.edit == false && !this.props.bio) {
