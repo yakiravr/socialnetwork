@@ -1,29 +1,40 @@
 export default function reducer(state = {}, action) {
-    // series of IF statements....
-    if (action.type === "UPDATE_STATE_SOMEHOW") {
-        // update state somehow...
+    console.log("action", action);
+    if (action.type === "FRIENDS_WANNABES") {
+        state = {
+            ...state,
+            Friends: action.arrayOfUsers,
+            accepted: true,
+        };
     }
-    // last thing we want to do is return the new state...
-    return state;
+
+    if (action.type === "ACCEPTREQUEST") {
+        state = {
+            ...state,
+            Friends: state.Friends.map((awaiting) => {
+                if (awaiting.id == action.id) {
+                    console.log("action id:", action.id);
+                    return {
+                        ...awaiting,
+                        accepted: true,
+                    };
+                } else {
+                    return awaiting;
+                }
+            }),
+        };
+    }
+    
+
+    if (action.type === "CANCEL") {
+        state = {
+            ...state,
+            Friends: state.Friends.filter((friend) => friend.id !== action.id),
+        };
+    }
+
+    return {
+        ...state,
+        accepted: false,
+    };
 }
-
-// it's really important to not MUTATE state....
-
-// useful array methods (ones that dont mutate)
-// filter and map
-
-//# filter - it's great if we want to get rid of something from an array...
-
-//# map - always returns a new array of the same length
-
-// cloning objects....
-
-// var person = { name: "pete"}
-
-// var otherPerson = {
-//     ...person,
-// };
-
-// cloning arrays....
-// var arr = [1212,3242,222];
-// var newArr = [...arr];

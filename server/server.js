@@ -311,6 +311,17 @@ app.post("/cancel/:idRoute", (req, res) => {
 });
 
 //____________________________________________________________________
+app.get("/friendsNwannabes", (req, res) => {
+    db.friendsAction(req.session.userId)
+        .then(({ rows }) => {
+            res.json({ rows, success:true});
+            console.log("rows friends obj:", rows);
+        })
+        .catch((err) => {
+            console.log("error in get friendsNwannabes :", err);
+            res.json({ success: false });
+        });
+});
 
 //____________________________________________________________________
 

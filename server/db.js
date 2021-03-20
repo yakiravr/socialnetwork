@@ -142,3 +142,16 @@ exports.cancelriendship = (userId, idRoute) => {
     return db.query(q, params);
 };
 //_______________________________________________
+
+module.exports.friendsAction = (userId) => {
+    const q = `
+        SELECT users.id, firstname, lastname, imgurl,  accepted
+    FROM friendships
+    JOIN users
+    ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND sender_id = $1 AND receiver_id= users.id)
+    `;
+    const params = [userId];
+    return db.query(q, params);
+};
