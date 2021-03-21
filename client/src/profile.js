@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 export default function Profile(props) {
     return (
         <div id="profileContainer">
-            <Link to={"/users"} className="toUsers">
-                Find Users
-            </Link>
-            <div>
-                <h2>
-                    {props.firstname} {props.lastname}
-                </h2>
+            <div id="findPeople">
+                <Link to={"/users"} className="toUsers">
+                    Find People
+                </Link>
             </div>
-            <div id="">
+            <div id="name">
+                {props.firstname} {props.lastname}
+            </div>
+
+            <div id="profilePic">
                 <ProfilePic
                     imgUrl={props.imgUrl}
                     lastname={props.lastname}

@@ -62,12 +62,14 @@ export default class Bio extends Component {
         }
         if (this.state.edit == true) {
             return (
-                <div className="SaveBio">
+                <div>
                     <textarea
+                        id="SaveBio"
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
                     ></textarea>
-                    <p onClick={() => this.SaveAddBttn()}>Save Bio</p>
+
+                    <div onClick={() => this.SaveAddBttn()}>Save Bio</div>
                 </div>
             );
         } else if (this.state.edit == false && !this.props.bio) {

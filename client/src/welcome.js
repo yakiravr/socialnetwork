@@ -6,9 +6,16 @@ import ResetPassword from "./ResetPassword";
 export default function Welcome() {
     return (
         <div id="welcome">
-            <h1></h1>
-            <div id="app-logo">
-                <img id="logo" src="icon.png" />
+            <div>
+                <h1 id="OVERDRAMA">OVERDRAMA</h1>
+            </div>
+            <div id="titel">
+                <h5>A social network for people who live drama</h5>
+            </div>
+            <div id="panic">
+                p <br></br> <br></br>A <br></br> <br></br>N <br></br>
+                <br></br> I <br></br>
+                <br></br> C <br></br>
             </div>
 
             <HashRouter>

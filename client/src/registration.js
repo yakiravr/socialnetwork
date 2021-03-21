@@ -39,44 +39,57 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <div id="login_in_egistration">
-                    <Link to="/login">Login</Link>
-                </div>
-
-                <div id="rest_in_egistration">
-                    <Link to="/verification">rest password</Link>
-                </div>
-                <div className="logo_container">
+                <div className="logo_in_registration">
                     <img className="logo" src="icon.png" alt="Scream" />
                 </div>
+
+                <br />
+                <br />
+                <br />
+
                 <div id="registration">
-                    <h1></h1>
                     {this.state.error && <p>something went wrong :(</p>}
                     <input
                         name="firstname"
                         placeholder="first"
                         onChange={(e) => this.handleChange(e)}
                     />
+                    <br></br>
+                    <br></br>
                     <input
                         name="lastname"
                         placeholder="last"
                         onChange={(e) => this.handleChange(e)}
                     />
+                    <br></br>
+                    <br></br>
                     <input
                         name="email"
                         placeholder="email"
                         onChange={(e) => this.handleChange(e)}
                     />
+                    <br></br>
+                    <br></br>
                     <input
                         name="password"
                         placeholder="password"
                         type="password"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <div className="submitReg">
-                        <button onClick={() => this.handleClick()}>
-                            submit!
-                        </button>
+                    <br></br>
+                    <br></br>
+                    <button
+                        id="submit-button"
+                        onClick={() => this.handleClick()}
+                    >
+                        submit
+                    </button>
+                    <div id="links">
+                        <span>
+                            {" "}
+                            <Link to="/login">Login ||</Link>
+                            <Link to="/verification"> Rest Password</Link>
+                        </span>
                     </div>
                 </div>
             </div>

@@ -1,162 +1,297 @@
+@font-face {
+    font-family: fontstack;
+    font-style: normal;
+    font-weight: 300;
+    src: local("Segoe UI"), local("Roboto"), local("Ubuntu");
+}
+
 body {
-    background-color: grey;
+    background-color: #4e676d;
+}
+/*___________ */
+#welcome {
+    height: 350px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 350px;
+    border: 10px solid #fabf2c;
+    background-color: #fabf2c;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+#OVERDRAMA {
+    position: absolute;
+    -webkit-text-stroke: 1px #fabf2c;
+    color: #4e676d;
+    text-shadow: 3px 3px 0 #4e676d, -1px -1px 0 #4e676d, 1px -1px 0 #4e676d,
+        -1px 1px 0 #4e676d, 1px 1px 0 #4e676d;
+    z-index: 9999999;
+    margin-left: 80px;
+    margin-top: -80px;
+    font-size: 30px;
+}
+#titel {
+    position: absolute;
+    color: #f48017;
+    margin-left: 0px;
+    margin-top: -70px;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+#panic {
+    position: absolute;
+    -webkit-text-stroke: 1px #f48017;
+    color: #4e676d;
+    text-shadow: 3px 3px 0 #4e676d, -1px -1px 0 #4e676d, 1px -1px 0 #4e676d,
+        -1px 1px 0 #4e676d, 1px 1px 0 #4e676d;
+    z-index: 9999999;
+    margin-left: -400px;
+    margin-top: -90px;
+    font-size: 80px;
+}
+
+.logo_in_registration img {
+    display: flex;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    margin-left: 0px;
+    bottom: 200px;
 }
 
 #registration {
-    margin-top: 200px;
-    margin: 0 auto;
-    width: 800px;
-}
-#login_in_egistration {
-    width: 50px;
-    height: 20px;
-    background: #999;
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 5px;
-}
-
-#rest_in_egistration {
-    width: 100px;
-    height: 20px;
-    background: #999;
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 5px;
-}
-
-.login {
-    margin-top: 200px;
-    margin: 0 auto;
-    width: 200px;
-}
-
-#logo {
-    justify-items: center;
-    size: 20px;
-}
-
-.submitReg {
-    position: fixed;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
-    margin-left: 350px;
-    width: 20px;
-    margin-top: 10px;
-}
-
-.loginBtn {
-    position: fixed;
-    margin-top: 1px;
-    margin-left: 60px;
-    width: 20px;
-    height: 5px;
+    margin-left: 100px;
 }
 
 input {
-    background-color: white;
-    font-family: "Times New Roman", Times, serif;
-    height: 20px;
-    font-size: 15px;
-    padding: 5px;
-    margin-right: 10px;
-}
-
-input:focus {
-    outline: none;
-    border: 1px solid blue;
-    box-shadow: 0 0 5px blue;
-}
-
-textarea {
-    background-color: #ffd2b0;
-    font-family: "Space Mono", monospace;
-    font-size: 15px;
-    resize: none;
-}
-
-textarea:focus {
-    outline: none;
-    border: 1px solid blue;
-    box-shadow: 0 0 5px blue;
-}
-
-/* /*___________ */
-
-.on-reset h1 {
-    font-size: 40px;
-    color: black;
-    text-shadow: -1px 1px 0 white, 1px -1px 0 white, 1px 1px 0 white,
-        -1px -1px 0 white;
-    margin: 0 0 20px 0;
-}
-
-.on-reset input {
-    background-color: rgba(0, 0, 0, 0.219);
-    color: white;
-    text-align: center;
-    border-radius: 5vh;
-    border-color: transparent;
-    border-style: solid;
-    margin: 10px;
-    width: 200px;
-    height: 40px;
-}
-
-.on-reset {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    color: white;
-    margin: auto;
-}
-
-.error {
-    color: crimson;
-}
-
-.logo {
-    width: 300px;
-    height: 300px;
+    background-color: #4e676d;
+    color: #fabf2c;
     margin: 0 auto;
-    align-items: center;
+    border: 1px solid #fabf2c;
 }
 
-.logo_container {
-    width: 100%;
-    display: flex;
+::placeholder {
+    color: #fabf2c;
+    opacity: 1;
+    text-align: center;
+}
+
+#submit-button {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 40px;
+    font-size: 20px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: #4e676d;
+}
+
+a {
+    color: #fabf2c;
+    text-decoration: none;
+}
+#links {
+    margin-top: 50px;
+    margin-left: -25px;
+    font-size: 25px;
+}
+
+#linksLogin {
+    margin-top: 50px;
+    margin-left: -50px;
+    font-size: 25px;
+    width: 400px;
+}
+
+#log {
+    margin-top: 0px;
+    margin-left: 50px;
+    font-size: 25px;
+    -webkit-text-stroke: 1px #f48017;
+    color: #fabf2c;
+}
+
+#restH1 {
+    margin-top: 0px;
+    margin-left: 110px;
+    font-size: 25px;
+    -webkit-text-stroke: 1px #f48017;
+    color: #fabf2c;
+}
+
+#restcontainer {
     justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 110px;
 }
 
-.logoInimg {
-    margin: 1rem;
-    width: 150px;
-    height: 150px;
+#submit-buttonRest {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 150px;
+    font-size: 20px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: #4e676d;
 }
 
-/*  _______________________________ */
+#submit-buttonRestBack {
+    color: #4e676d;
+}
+
+#logUpdate {
+    margin-top: 0px;
+    margin-left: 70px;
+    font-size: 25px;
+    -webkit-text-stroke: 1px #f48017;
+    color: #fabf2c;
+}
+.erorr {
+    color: red;
+}
+
+#submit-buttonRestUpdate {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 80px;
+    font-size: 20px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: #4e676d;
+}
+
+#on-reset {
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+/*_______________________________________________________________________________________________________end*/
 
 #app-logo img {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     margin-top: 0px;
-    margin-left: 1600px;
+    margin-left: 1560px;
+    border: 1px solid #f48017;
 }
 
-#containerUploader {
-    position: fixed;
-    background-color: rgb(226, 226, 200);
-    color: black;
-    width: 550px;
-    height: 150px;
-    text-align: center;
+.linksInApp {
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+#profileLink {
+    font-size: 25px;
+}
+
+#friendsLink {
+    font-size: 30px;
+}
+#logOut {
+    font-size: 18px;
+    margin-left: 1480px;
+    margin-top: -25px;
+    color: #f48017;
+      font-weight: bold;
 }
 
 #appContainer {
     display: flex;
     justify-content: space-between;
+    margin-top: 0px;
+}
+
+#containerUploader {
+    position: fixed;
+    background-color: #4e676d;
+    color: black;
+    width: 550px;
+    height: 150px;
+    text-align: center;
+    width: 300px;
+}
+
+#changePic {
+    color: #0f0401;
+    margin-top: -20px;
+    font-size: 20px;
+}
+h4 {
+    color: #000000;
+}
+
+#submit-buttonUploader {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    font-size: 10px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: #4e676d;
+}
+
+#scream {
+    position: absolute;
+
+    margin-top: 160px;
+    margin-left: 15px;
+    font-size: 80px;
+    font-family: "Courier New", Courier, monospace;
+    border: 2px solid;
+}
+
+#scream2 {
+    position: absolute;
+
+    margin-top: 160px;
+    margin-left: 1600px;
+    font-size: 80px;
+    font-family: "Courier New", Courier, monospace;
+    border: 2px solid;
+}
+
+#s {
+    color: #fabf2c;
+}
+#c {
+    color: #4e342d;
+}
+#r {
+    color: #f48017;
+}
+#e {
+    color: saddlebrown;
+}
+#a {
+    color: #fabf2c;
+}
+#m {
+    color: #f48017;
 }
 
 #upload {
@@ -169,19 +304,21 @@ textarea:focus {
     float: left;
 }
 
-/*  _______________________________ */
 #profileContainer {
-    position: relative;
+    position: absolute;
     text-align: center;
-    width: 200px;
-    margin-right: 850px;
+
+    margin-left: 500px;
     margin-top: 100px;
+    border: 2px solid #f48017;
+    width: 700px;
+    background-color: #58747a;
 }
 
 #profileContainer img {
     display: flex;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
 }
 
@@ -190,21 +327,244 @@ img {
     width: 80px;
     height: 80px;
     margin-top: 12px;
+    margin-left: 150px;
+}
+
+#name {
+    position: absolute;
+    color: #fabf2c;
+    margin-top: 0px;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+#SaveBio {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    font-size: 15px;
+    background: #4e676d;
+    border: 1px solid#f48017;
+    cursor: pointer;
+    color: #fabf2c;
+    width: 680px;
+    float: right;
+}
+
+#SaveBio:hover {
+    background-color: #d6ab82;
+    color: #4e676d;
+}
+
+#SaveBio:focus {
+    outline: none;
+}
+
+p {
+    text-align: left;
+    padding-left: 0em;
+    color: black;
+
+    display: inline-block;
+
+    width: 400px;
+    font-weight: 900;
+}
+
+#SaveBio:focus {
+    outline: none;
 }
 
 /*  _______________________________ */
 
-#findPPL {
-    margin-top: 200px;
-    margin: 0 auto;
-    width: 200px;
+#findpeople {
+    margin: 150px;
+    position: absolute;
 }
+
+h1 {
+    position: absolute;
+    margin-left: 730px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    color: #fabf2c;
+}
+
+#search-results {
+    margin-top: 100px;
+    margin-left: 150px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.searchTerm {
+    position: relative;
+    margin-left: 600px;
+
+    color: white;
+}
+
+#findpeople-img {
+    border: 1px solid #fabf2c;
+}
+
+#names {
+    color: black;
+    margin-top: 20px;
+    margin-left: 150px;
+}
+
+#search {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 650px;
+    size: 200px;
+}
+
+#findPeople {
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 0px;
+
+    font-size: 30px;
+}
+
+
+#friendsInfriends{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 200px;
+   
+}
+#endInFriends{
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+
+#Awaiting{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -100px;
+   
+}
+
+
+
+#friendsInfriends p{
+    
+    margin-left: 140px;
+    color:#fabf2c;
+   
+}
+
+
+#endfrienshipbtn {
+    
+     font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 140px;
+    font-size: 10px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: black;
+   
+}
+
+#acceptfrienshipbtn {
+    
+     font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 120px;
+    font-size: 10px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: black;
+   
+}
+
+#rejectfrienshipbtn {
+    
+     font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left:5px;
+    font-size: 10px;
+
+    background-color: rgb(235, 127, 127);
+    cursor: pointer;
+    color: black;
+   
+}
+
+#submit-button-inFriendsbtn {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    font-size: 15px;
+
+    background-color: #fabf2c;
+    cursor: pointer;
+    color: #4e676d;
+}
+
+#OVERDRAMAInApp {
+    position: absolute;
+    -webkit-text-stroke: 1px #fabf2c;
+    color: #4e676d;
+    text-shadow: 3px 3px 0 #4e676d, -1px -1px 0 #4e676d, 1px -1px 0 #4e676d,
+        -1px 1px 0 #4e676d, 1px 1px 0 #4e676d;
+    z-index: 9999999;
+    margin-left: 1560px;
+    margin-top: 110px;
+    font-size: 15px;
+}
+
+
+#findPeopleInApp {
+    margin-top:-21px;
+    margin-left: 350px;
+    color: black;
+    color:#f48017;
+      font-weight: bold;
+
+}
+.color{
+     color:#f48017;
+
+}
+#friendsLogo {
+    width: 500px;
+    
+    margin-left: 220px;
+    margin-top: 40px;
+
+}
+
+/*___________ */
+
+/*  _______________________________ */
 
 /*  _______________________________ */
 
 /* friendsbutton*/
 /*  _______________________________ */
-
 
 /* friends*/
 /*  _______________________________ */

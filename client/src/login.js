@@ -38,31 +38,49 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-                <div id="rest_in_egistration">
-                    <Link to="/verification">rest password</Link>
-                </div>
-                <div className="login">
-                    <div className="logo_container">
-                        <img className="logo" src="icon.png" alt="Scream" />
+                <div>
+                    <div className="logo_in_registration">
+                        <img src="icon.png" alt="Scream" />
                     </div>
-                    <h1>Login</h1>
-                    {this.state.error && <p>something went wrong :(</p>}
-                    <input
-                        name="email"
-                        type="text"
-                        placeholder="Email Address"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <div className="loginBtn">
-                        <button onClick={() => this.handleClick()}>
-                            Login!
-                        </button>
+                    <br></br>
+                    <br></br>
+                    <div id="registration">
+                        <div id="log">Login</div>
+                        <br></br>
+                        <br></br>
+                        {this.state.error && <p>something went wrong :(</p>}
+                        <input
+                            name="email"
+                            type="text"
+                            placeholder="Email Address"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <br></br>
+                        <br></br>
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <button
+                                id="submit-button"
+                                onClick={() => this.handleClick()}
+                            >
+                                Login!
+                            </button>
+                            <div id="linksLogin">
+                                <Link to="/verification">
+                                    {" "}
+                                    Rest-Password ||
+                                </Link>
+
+                                <Link to="/"> Registration</Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -26,62 +26,72 @@ export default function Friends() {
 
     return (
         <div>
-            <p>Friends</p>
-            <p>Awaiting Friend Confirmation</p>
-            <div className="Awaiting">
-                {awaiting &&
-                    awaiting.map((awaiting) => {
-                        return (
-                            <div key={awaiting.id}>
-                                <p>
-                                    {awaiting.firstname} {awaiting.lastname}
-                                </p>
-                                <Link to={"/user/" + awaiting.id}>
-                                    <img src={awaiting.imgurl} />
-                                </Link>
-                                <button
-                                    className="Accept Reqeust"
-                                    onClick={() =>
-                                        dispatch(
-                                            acceptFriendRequest(awaiting.id)
-                                        )
-                                    }
-                                >
-                                    Accept Friend Request
-                                </button>
-                                <button
-                                    className=" Reject Friend Request"
-                                    onClick={() =>
-                                        dispatch(endFriendship(awaiting.id))
-                                    }
-                                >
-                                    Reject Friend Request
-                                </button>
-                            </div>
-                        );
-                    })}
-                <div>
-                    {friends &&
-                        friends.map((friend) => {
+            <img id="friendsLogo" src="friends.png" alt="friends" />
+            <div id="friendsInfriends">
+                <div id="Awaiting">
+                    {awaiting &&
+                        awaiting.map((awaiting) => {
                             return (
-                                <div key={friend.id}>
+                                <div key={awaiting.id}>
                                     <p>
-                                        {friend.firstname} {friend.lastname}
+                                        {awaiting.firstname} {awaiting.lastname}
                                     </p>
-                                    <Link to={"/user/" + friend.id}>
-                                        <img src={friend.imgurl} />
+                                    <Link to={"/user/" + awaiting.id}>
+                                        <img src={awaiting.imgurl} />
                                     </Link>
+
                                     <button
-                                        className="End Friendship"
+                                        id="acceptfrienshipbtn"
+                                        className="Accept Reqeust"
                                         onClick={() =>
-                                            dispatch(endFriendship(friend.id))
+                                            dispatch(
+                                                acceptFriendRequest(awaiting.id)
+                                            )
                                         }
                                     >
-                                        End Friendship
+                                        Accept Friend Request
+                                    </button>
+
+                                    <button
+                                        id="rejectfrienshipbtn"
+                                        className=" Reject Friend Request"
+                                        onClick={() =>
+                                            dispatch(endFriendship(awaiting.id))
+                                        }
+                                    >
+                                        Reject Friend Request
                                     </button>
                                 </div>
                             );
                         })}
+
+                    <div id="endInFriends">
+                        {friends &&
+                            friends.map((friend) => {
+                                return (
+                                    <div key={friend.id}>
+                                        <p>
+                                            {friend.firstname} {friend.lastname}
+                                        </p>
+                                        <Link to={"/user/" + friend.id}>
+                                            <img src={friend.imgurl} />
+                                        </Link>
+
+                                        <button
+                                            id="endfrienshipbtn"
+                                            className="End Friendship"
+                                            onClick={() =>
+                                                dispatch(
+                                                    endFriendship(friend.id)
+                                                )
+                                            }
+                                        >
+                                            End Friendship
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                    </div>
                 </div>
             </div>
         </div>

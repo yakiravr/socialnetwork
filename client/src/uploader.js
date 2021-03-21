@@ -41,13 +41,17 @@ export default class Uploader extends Component {
         return (
             <div id="containerUploader">
                 <h4 onClick={this.props.toggleUploader}>close</h4>
-                <h3>change a profile picture</h3>
+                <span>
+                    <div id="changePic">change a profile picture</div>
+                </span>
                 <input
                     onChange={(e) => this.handleChange(e)}
                     name="file"
                     type="file"
                 />
-                <button onClick={() => this.handleClick()}>UPLOAD</button>
+                <button id="submit-buttonUploader" onClick={() => this.handleClick()}>
+                    UPLOAD
+                </button>
             </div>
         );
     }

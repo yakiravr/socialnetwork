@@ -50,7 +50,7 @@ export function FriendButton(idRoute) {
 
     return (
         <div>
-            <button id="requestBttn" onClick={handleClick}>
+            <button id="submit-button-inFriendsbtn" onClick={handleClick}>
                 {buttonText}
             </button>
         </div>

@@ -20,27 +20,37 @@ export default function FindPeople() {
 
     return (
         <>
-            <div id="findPPL">
-                <h1>Find people</h1>
-                {users &&
-                    users.map((users) => {
-                        return (
-                            <div key={users.id}>
-                                <Link to={`/user/${users.id}`}>
-                                    <p>
-                                        <img src={users.imgurl} /> {""}
-                                        {users.firstname} {""}
-                                        {users.lastname}
-                                    </p>
-                                </Link>
-                            </div>
-                        );
-                    })}
+            <h1>Find people</h1>
+
+            <div id="findpeople">
                 <div className="searchTerm">
                     <input
-                        placeholder={searchTerm}
+                        placeholder="find profile"
                         onChange={({ target }) => setSearchTerm(target.value)}
                     />
+                </div>
+
+                <div id="search-results">
+                    {users &&
+                        users.map((users) => {
+                            return (
+                                <div key={users.id}>
+                                    <Link to={`/user/${users.id}`}>
+                                        <img
+                                            src={users.imgurl}
+                                            id="findpeople-img"
+                                        />
+                                        <div id="names">
+                                            {users.firstname}
+                                            {users.lastname}
+                                        </div>
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                </div>
+                <div>
+                    <img id="search" src="search.png" alt="search" />
                 </div>
             </div>
         </>

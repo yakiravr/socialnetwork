@@ -68,40 +68,59 @@ export default class ResetPassword extends React.Component {
         const { step } = this.state;
         if (step == 1) {
             return (
-                <div className="on-reset">
-                    <h1>rest password</h1>
-                    <div className="logo_container">
-                        <img className="logo" src="icon.png" alt="Scream" />
+                <div>
+                    <div className="logo_in_registration">
+                        <img src="icon.png" alt="Scream" />
                     </div>
-                    <span>Email</span>
+                    <br></br>
+                    <br></br>
+                    <h1 id="restH1">rest password</h1>
 
-                    <input
-                        name="email"
-                        placeholder="Email"
-                        onChange={(e) => this.handleChange(e)}
-                    />
+                    <br></br>
+                    <br></br>
+                    <div id="restcontainer">
+                        <input
+                            name="email"
+                            placeholder="Email"
+                            onChange={(e) => this.handleChange(e)}
+                        />
 
-                    {this.state.error && (
-                        <p className="error">something went wrong</p>
-                    )}
+                        {this.state.error && (
+                            <p className="error">something went wrong</p>
+                        )}
+                    </div>
 
-                    <button onClick={() => this.handleClick()}>Send</button>
-                    <Link to="/" className="Link">
-                        Back
-                    </Link>
+                    <button
+                        id="submit-buttonRest"
+                        onClick={() => this.handleClick()}
+                    >
+                        Send
+                    </button>
+                    <button id="submit-buttonRest">
+                        <Link
+                            id="submit-buttonRestBack"
+                            to="/login"
+                            className="Link"
+                        >
+                            {" "}
+                            Back
+                        </Link>
+                    </button>
                 </div>
             );
         } else if (step == 2) {
             return (
-                <div className="on-reset">
-                    <h1>Confirm</h1>
-                    <h1>Secret Code</h1>
+                <div id="on-reset">
+                    <br></br>
+                    <br></br>
                     <input
                         name="code"
                         placeholder="code"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <span>New Password</span>
+                    <br></br>
+                    <br></br>
+
                     <input
                         name="newpass"
                         placeholder="New Password"
@@ -111,22 +130,25 @@ export default class ResetPassword extends React.Component {
                     {this.state.error && (
                         <p className="error">something went wrong</p>
                     )}
-                    <button onClick={() => this.handleClickReset()}>
+                    <button
+                        id="submit-button"
+                        onClick={() => this.handleClickReset()}
+                    >
                         Submit
                     </button>
-                    <Link to="/" className="">
-                        Back
-                    </Link>
+                    <br></br>
+                    <br></br>
                 </div>
             );
         } else if (step == 3) {
             return (
-                <div className="on-reset">
-                    <h1>Password Updated </h1>
-
-                    <Link to="/login" className="">
-                        Back
-                    </Link>
+                <div id="logUpdate">
+                    <h1>Password Updated</h1>
+                    <button id="submit-buttonRestUpdate">
+                        <Link id="submit-buttonRestBack" to="/login">
+                            Back
+                        </Link>
+                    </button>
                 </div>
             );
         }
