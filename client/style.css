@@ -546,8 +546,7 @@ h1 {
     height: 500px;
     width: 700px;
     overflow-y: auto;
-      border: 1px solid black;
-    
+    border: 1px solid black;
 }
 
 #chat-box {
@@ -556,9 +555,7 @@ h1 {
     align-items: center;
     width: 100%;
     margin-top: 200px;
-    
 }
-
 
 .chatContainer {
     display: flex;
@@ -587,19 +584,17 @@ h1 {
     font-size: 15px;
     margin-top: 30px;
     margin-left: -400px;
-
 }
 
 #textarea-chat {
     width: 694px;
     height: 80px;
-    font-size:15px;
+    font-size: 15px;
     background-color: #4e676d;
-      border: 1px solid black;
-  
+    border: 1px solid black;
 }
 
-#TITELchat{
+#TITELchat {
     position: absolute;
     -webkit-text-stroke: 1px #f48017;
     color: #4e676d;
@@ -609,16 +604,15 @@ h1 {
     margin-left: -1320px;
     margin-top: -50px;
     font-size: 70px;
-  
 }
 
-#deleteAccount{
-  margin-left: 50px;
+#deleteAccount {
+    margin-left: 50px;
 }
 
 /*  _______________________________ */
 
-#onlineContainer  {
+#onlineContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -631,24 +625,14 @@ h1 {
 }
 
 #onlineNames {
-         margin-left: -560px;
-          color: #f48017;
+    margin-left: -560px;
+    color: #f48017;
 }
 
 #onlinetitle {
-        margin-left: -1010px;
-        color:  #fabf2c;
-        font-size: 20px;
-        font-weight: bolder;
-        margin-top:-50px;
-        
+    margin-left: -1010px;
+    color: #fabf2c;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: -50px;
 }
-
-
-/*  _______________________________ */
-
-/* friendsbutton*/
-/*  _______________________________ */
-
-/* friends*/
-/*  _______________________________ */

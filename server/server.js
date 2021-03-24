@@ -365,9 +365,11 @@ io.on("connection", (socket) => {
     const arrayOfObj = Object.values(onlineUsers);
 
     //The Object.values() method returns an array of a given object's:id
-    const online = arrayOfObj.sort((users) => {
-        return users.length != 0;
+    const online = arrayOfObj.filter((users) => {
+        return users.length != 0 && users != userId;
     });
+
+    //no userId display
 
     db.getUserByIds(online).then(({ rows }) => {
         io.sockets.emit("online", rows);
