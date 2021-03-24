@@ -40,3 +40,9 @@ export function chat(msg) {
         data: msg,
     };
 }
+export async function onlineUsers(data) {
+    return {
+        type: "ONLINE_USERS",
+        data: data,
+    };
+}

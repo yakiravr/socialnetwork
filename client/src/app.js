@@ -8,6 +8,7 @@ import { OtherProfile } from "./otherprofile";
 import FindPeople from "./findPeople";
 import Friends from "./friends";
 import Chat from "./chat";
+import OnlineUsers from "./onlineUsers";
 
 export default class App extends Component {
     constructor() {
@@ -90,13 +91,16 @@ export default class App extends Component {
                     </Link>
                 </div>
 
-                <Link id ="chatInapp" to="/chat">Chat</Link>
+                <Link id="chatInapp" to="/chat">
+                    Chat || {""}
+                </Link>
+                <Link id="" to="/online">
+                    Online Users
+                </Link>
 
                 <div id="logOut" onClick={() => this.logout()}>
                     Log-out
                 </div>
-
-                <Route path="/users" render={() => <FindPeople />} />
 
                 <div id="appContainer">
                     <ProfilePic
@@ -146,6 +150,8 @@ export default class App extends Component {
                         )}
                     />
                     <Route path="/friends" component={Friends} />
+                    <Route path="/users" render={() => <FindPeople />} />
+                    <Route path="/online" component={OnlineUsers} />
 
                     {this.state.uploaderIsVisible && (
                         <div id="upload">

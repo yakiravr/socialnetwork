@@ -336,7 +336,6 @@ app.get("/friendsNwannabes", (req, res) => {
 });
 
 //____________________________________________________________________
-
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
@@ -350,12 +349,36 @@ server.listen(process.env.PORT || 3001, function () {
 });
 
 //____________________________________________________________________
-
+let onlineUsers = {};
 io.on("connection", (socket) => {
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
     const userId = socket.request.session.userId;
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+    //___________________________________________________________
+    onlineUsers[socket.id] = userId;
+    console.log("onlineUsers[socket.id]", onlineUsers[socket.id]);
+    console.log("userId", userId);
+    const arrayOfObj = Object.values(onlineUsers);
+
+    //The Object.values() method returns an array of a given object's:id
+    const online = arrayOfObj.sort((users) => {
+        return users.length != 0;
+    });
+
+    db.getUserByIds(online).then(({ rows }) => {
+        io.sockets.emit("online", rows);
+    });
+
+    socket.on("disconnect", () => {
+        delete onlineUsers[socket.id];
+        // console.log(`Socket with id: ${socket.id} is disconnected!`);
+    });
+    //___________________________________________________________
+
     db.getTenMessages()
         .then(({ rows }) => {
             socket.emit("chatMsg", rows.reverse());

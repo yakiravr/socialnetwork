@@ -48,5 +48,11 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    if (action.type === "ONLINE_USERS") {
+        state = {
+            ...state,
+            onlineState: action.data,
+        };
+    }
     return state;
 }

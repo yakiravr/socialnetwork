@@ -178,3 +178,12 @@ module.exports.getTenMessages = () => {
     `;
     return db.query(q);
 };
+//_______________________________________________
+module.exports.getUserByIds = (userIds) => {
+    const q = `SELECT firstname,lastname,imgurl FROM users WHERE
+     id = ANY($1)
+     `;
+    const params = [userIds];
+    return db.query(q, params);
+};
+//_______________________________________________

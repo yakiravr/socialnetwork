@@ -211,7 +211,7 @@ a {
 #logOut {
     font-size: 18px;
     margin-left: 1480px;
-    margin-top: -25px;
+    margin-top: -10px;
     color: #f48017;
     font-weight: bold;
 }
@@ -445,6 +445,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     margin-top: -100px;
+    margin-left: 0px;
 }
 
 #friendsInfriends p {
@@ -611,12 +612,38 @@ h1 {
   
 }
 
-#chatInapp{
-   font-size: 20px;
+#deleteAccount{
+  margin-left: 50px;
 }
 
-
 /*  _______________________________ */
+
+#onlineContainer  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 200px;
+}
+
+#picOnline {
+    margin-left: -700px;
+}
+
+#onlineNames {
+         margin-left: -560px;
+          color: #f48017;
+}
+
+#onlinetitle {
+        margin-left: -1010px;
+        color:  #fabf2c;
+        font-size: 20px;
+        font-weight: bolder;
+        margin-top:-50px;
+        
+}
+
 
 /*  _______________________________ */
 

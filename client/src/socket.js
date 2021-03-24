@@ -1,4 +1,4 @@
-import { mostRecent, chat } from "./actions";
+import { mostRecent, chat, onlineUsers } from "./actions";
 import { io } from "socket.io-client";
 
 export let socket;
@@ -15,4 +15,7 @@ export const init = (store) => {
 
         socket.on("userMsg", (msg) => store.dispatch(chat(msg)));
     }
+    socket.on("online", (data) => {
+        store.dispatch(onlineUsers(data));
+    });
 };
