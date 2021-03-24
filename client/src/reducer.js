@@ -24,17 +24,29 @@ export default function reducer(state = {}, action) {
             }),
         };
     }
-    
 
     if (action.type === "CANCEL") {
         state = {
             ...state,
             Friends: state.Friends.filter((friend) => friend.id !== action.id),
         };
+    } else {
+        state;
     }
 
-    return {
-        ...state,
-        accepted: false,
-    };
+    if (action.type === "MOST_RECENT_MESSAGES") {
+        state = {
+            ...state,
+            messagesState: action.data,
+        };
+    }
+
+    if (action.type === "CHAT_MESSAGE") {
+        state = {
+            ...state,
+            messagesState: [...state.messagesState, action.data],
+        };
+    }
+
+    return state;
 }

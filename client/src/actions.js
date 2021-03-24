@@ -26,3 +26,17 @@ export async function endFriendship(data) {
         id: data,
     };
 }
+
+export function mostRecent(msgs) {
+    return {
+        type: "MOST_RECENT_MESSAGES",
+        data: msgs,
+    };
+}
+
+export function chat(msg) {
+    return {
+        type: "CHAT_MESSAGE",
+        data: msg,
+    };
+}

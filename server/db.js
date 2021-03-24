@@ -155,3 +155,26 @@ module.exports.friendsAction = (userId) => {
     const params = [userId];
     return db.query(q, params);
 };
+
+//_______________________________________________
+module.exports.insertMessage = (sender_id, msg) => {
+    const q = `
+        INSERT INTO messages (sender_id, msg)
+        VALUES ($1, $2)
+        RETURNING created_at, id
+    `;
+    const params = [sender_id, msg];
+    return db.query(q, params);
+};
+
+module.exports.getTenMessages = () => {
+    const q = `
+        SELECT users.firstname, users.lastname, users.imgurl, sender_id, msg , messages.id, messages.created_at
+        FROM messages
+        JOIN users
+        ON sender_id = users.id
+        ORDER BY messages.id DESC
+        LIMIT 10
+    `;
+    return db.query(q);
+};

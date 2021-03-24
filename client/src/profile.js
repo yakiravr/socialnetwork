@@ -1,14 +1,14 @@
 import BioEditor from "./bioeditor";
 import ProfilePic from "./profilepic";
-import { Link } from "react-router-dom";
+{/*import { Link } from "react-router-dom";*/}
 
 export default function Profile(props) {
     return (
         <div id="profileContainer">
             <div id="findPeople">
-                <Link to={"/users"} className="toUsers">
+                {/*  <Link to={"/users"} className="toUsers">
                     Find People
-                </Link>
+                </Link>*/}
             </div>
             <div id="name">
                 {props.firstname} {props.lastname}

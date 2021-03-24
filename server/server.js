@@ -9,12 +9,21 @@ const csurf = require("csurf");
 const crs = require("crypto-random-string");
 const ses = require("./ses");
 const s3 = require("./s3");
+const uidSafe = require("uid-safe");
 const config = require("./config.json");
+
+// this is our socket.io boilerplate
+const server = require("http").Server(app); //app because of first handshake handshake
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+
+///socket///
+
 ///upload///
 
 const multer = require("multer");
-const uidSafe = require("uid-safe");
-
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
@@ -34,17 +43,15 @@ const uploader = multer({
 });
 ///upload///
 
-app.use(compression());
-app.use(express.static(path.join(__dirname, "..", "client", "public")));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const cookieSessionMiddleware = cookieSession({
+    secret: `eating is an intentional act`,
+    maxAge: 1000 * 60 * 60 * 24 * 14,
+});
 
-app.use(
-    cookieSession({
-        secret: `eating is an intentional act`,
-        maxAge: 1000 * 60 * 60 * 24 * 14,
-    })
-);
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 app.use(function (req, res, next) {
@@ -52,6 +59,11 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(compression());
+app.use(express.static(path.join(__dirname, "..", "client", "public")));
+app.use(express.json());
+
+//_________________________________________
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");
@@ -314,7 +326,7 @@ app.post("/cancel/:idRoute", (req, res) => {
 app.get("/friendsNwannabes", (req, res) => {
     db.friendsAction(req.session.userId)
         .then(({ rows }) => {
-            res.json({ rows, success:true});
+            res.json({ rows, success: true });
             console.log("rows friends obj:", rows);
         })
         .catch((err) => {
@@ -333,6 +345,49 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
+});
+
+//____________________________________________________________________
+
+io.on("connection", (socket) => {
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    const userId = socket.request.session.userId;
+    db.getTenMessages()
+        .then(({ rows }) => {
+            socket.emit("chatMsg", rows.reverse());
+        })
+        .catch((error) => {
+            console.log("error in 10 Msg server:", error);
+        });
+
+    socket.on("chatMsg", (messageOnSocket) => {
+        const message = messageOnSocket;
+        console.log("massage on Socket", message);
+
+        // console.log(`Socket with id: ${socket.id} has connected!`);
+        db.insertMessage(userId, messageOnSocket).then(({ rows }) => {
+            const created_at = rows[0].created_at;
+            const id = rows[0].id;
+            console.log("id server:", rows[0].id);
+            console.log("reated_at server:", rows[0].created_at);
+            db.getUser(userId)
+                .then(({ rows }) => {
+                    io.emit("userMsg", {
+                        firstname: rows[0].firstname,
+                        lastname: rows[0].lastname,
+                        imgurl: rows[0].imgurl,
+                        id,
+                        msg: message,
+                        created_at,
+                    });
+                })
+                .catch((error) => {
+                    console.log("error in insert Msg:", error);
+                });
+        });
+    });
 });

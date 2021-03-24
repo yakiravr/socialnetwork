@@ -26,7 +26,8 @@ export default function Friends() {
 
     return (
         <div>
-            <img id="friendsLogo" src="friends.png" alt="friends" />
+            {/* <img id="friendsLogo" src="friends.png" alt="friends" />*/}
+
             <div id="friendsInfriends">
                 <div id="Awaiting">
                     {awaiting &&
